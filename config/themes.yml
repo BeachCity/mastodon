@@ -5,3 +5,4 @@ mastodon-dark: styles/application.scss
 beachcity-single: styles/beachcity-single.scss
 mastodon-light-single: styles/mastodon-light-single.scss
 mastodon-dark-single: styles/mastodon-dark-single.scss
+win95: styles/win95.scss
