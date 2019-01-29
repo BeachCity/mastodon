@@ -32,6 +32,10 @@ module Mastodon
       [major, minor, patch].compact
     end
 
+    def suffix
+      '+beachcity'
+    end
+
     def to_s
       components = [to_a.join('.')]
       components << "-#{prerelease}" if prerelease.present?
