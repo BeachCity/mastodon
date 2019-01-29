@@ -28,6 +28,10 @@ module Mastodon
       [major, minor, patch].compact
     end
 
+    def suffix
+      '+beachcity'
+    end
+
     def to_s
       [to_a.join('.'), flags, suffix].join
     end
