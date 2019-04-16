@@ -207,7 +207,7 @@ sv:
         setting_noindex: Uteslutning av sökmotorindexering
         setting_reduce_motion: Minska rörelser i animationer
         setting_show_application: Visa programmet som används för att skicka tutningar
-        setting_system_font_ui: Använd systemets standardfont
+        setting_system_font_ui: Använd webbläsarens standardfont
         setting_theme: Sidans tema
         setting_trends: Visa dagens trender
         setting_unfollow_modal: Visa bekräftelse innan du slutar följa någon
