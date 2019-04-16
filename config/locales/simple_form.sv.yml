@@ -216,7 +216,7 @@ sv:
         setting_expand_spoilers: Utöka alltid tutningar markerade med innehållsvarningar
         setting_hide_network: Göm ditt nätverk
         setting_reduce_motion: Minska rörelser i animationer
-        setting_system_font_ui: Använd systemets standardfont
+        setting_system_font_ui: Använd webbläsarens standardfont
         setting_theme: Sidans tema
         setting_trends: Visa dagens trender
         setting_unfollow_modal: Visa bekräftelse innan du slutar följa någon
