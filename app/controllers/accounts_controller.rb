@@ -34,14 +34,14 @@ class AccountsController < ApplicationController
       format.atom do
         mark_cacheable!
 
-        @entries = @account.stream_entries.where(hidden: false).with_includes.paginate_by_max_id(PAGE_SIZE, params[:max_id], params[:since_id])
+        @entries = @account.stream_entries.where(hidden: false).with_includes.without_local_only.paginate_by_max_id(PAGE_SIZE, params[:max_id], params[:since_id])
         render xml: OStatus::AtomSerializer.render(OStatus::AtomSerializer.new.feed(@account, @entries.reject { |entry| entry.status.nil? }))
       end
 
       format.rss do
         mark_cacheable!
 
-        @statuses = cache_collection(default_statuses.without_reblogs.without_replies.limit(PAGE_SIZE), Status)
+        @statuses = cache_collection(default_statuses.without_local_only.without_reblogs.without_replies.limit(PAGE_SIZE), Status)
         render xml: RSS::AccountSerializer.render(@account, @statuses)
       end
 
@@ -70,7 +70,11 @@ class AccountsController < ApplicationController
   end
 
   def default_statuses
-    @account.statuses.where(visibility: [:public, :unlisted])
+    if current_user.nil?
+      @account.statuses.without_local_only.where(visibility: [:public, :unlisted])
+    else
+      @account.statuses.where(visibility: [:public, :unlisted])
+    end
   end
 
   def only_media_scope

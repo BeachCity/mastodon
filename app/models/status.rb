@@ -22,6 +22,7 @@
 #  application_id         :bigint(8)
 #  in_reply_to_account_id :bigint(8)
 #  poll_id                :bigint(8)
+#  local_only             :boolean
 #
 
 class Status < ApplicationRecord
@@ -82,6 +83,7 @@ class Status < ApplicationRecord
 
   scope :without_replies, -> { where('statuses.reply = FALSE OR statuses.in_reply_to_account_id = statuses.account_id') }
   scope :without_reblogs, -> { where('statuses.reblog_of_id IS NULL') }
+  scope :without_local_only, -> { where(local_only: [false, nil]) }
   scope :with_public_visibility, -> { where(visibility: :public) }
   scope :tagged_with, ->(tag) { joins(:statuses_tags).where(statuses_tags: { tag_id: tag }) }
   scope :excluding_silenced_accounts, -> { left_outer_joins(:account).where(accounts: { silenced: false }) }
@@ -150,6 +152,10 @@ class Status < ApplicationRecord
 
   def local?
     attributes['local'] || uri.nil?
+  end
+
+  def local_only?
+    local_only
   end
 
   def reblog?
@@ -256,6 +262,8 @@ class Status < ApplicationRecord
   after_create_commit :update_statistics, if: :local?
 
   around_create Mastodon::Snowflake::Callbacks
+
+  before_create :set_locality
 
   before_validation :prepare_contents, if: :local?
   before_validation :set_reblog
@@ -375,7 +383,7 @@ class Status < ApplicationRecord
       visibility = [:public, :unlisted]
 
       if account.nil?
-        where(visibility: visibility)
+        where(visibility: visibility).without_local_only
       elsif target_account.blocking?(account) # get rid of blocked peeps
         none
       elsif account.id == target_account.id # author can see own stuff
@@ -418,7 +426,7 @@ class Status < ApplicationRecord
     end
 
     def filter_timeline_default(query)
-      query.excluding_silenced_accounts
+      query.without_local_only.excluding_silenced_accounts
     end
 
     def account_silencing_filter(account)
@@ -486,6 +494,10 @@ class Status < ApplicationRecord
 
   def set_local
     self.local = account.local?
+  end
+
+  def set_locality
+    self.local_only = reblog.local_only if reblog?
   end
 
   def update_statistics
