@@ -6,7 +6,7 @@ Beach City is our private online sanctuary for close friends. This here is our p
 
 - [Beach City homepage](https://beach.city)
 - [Support Beach City via Patreon](https://www.patreon.com/beachCity)
-- [Mastodon homepage?](https://joinmastodon.org)
+- [Mastodon homepage](https://joinmastodon.org)
 - [Support Mastodon development via Patreon][patreon]
 - [Browse Mastodon apps](https://joinmastodon.org/apps)
 
