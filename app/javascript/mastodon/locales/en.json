@@ -348,7 +348,7 @@
   "privacy.private.short": "Followers Only",
   "privacy.public.long": "Broadcast to all public timelines",
   "privacy.public.short": "Public",
-  "privacy.unlisted.long": "Post to followers and personal profile",
+  "privacy.unlisted.long": "Post to followers and public profile",
   "privacy.unlisted.short": "Unlisted",
   "refresh": "Refresh",
   "regeneration_indicator.label": "Loading…",
