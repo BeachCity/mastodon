@@ -18,6 +18,12 @@ Mastodon is **free, open source software** licensed under **AGPLv3**.  As a resu
 
 If you want to contribute to Mastodon, go to their page.  If you want to add features to Beach City, feel freel to submit a PR to us. We generally accept anything our citizens do for us, as long as they take time to test it.
 
+Our branching strategy is thus:
+
+Changes, including merges from upstream, go in dev.
+When we feel like it, we merge dev to staging and our QA team verifies the build is happy.
+When they give us the green light, we merge to prod and deploy.
+
 ## License
 
 Copyright (C) 2016-2022 Eugen Rochko & other Mastodon contributors (see [AUTHORS.md](AUTHORS.md))
