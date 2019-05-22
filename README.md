@@ -20,9 +20,9 @@ If you want to contribute to Mastodon, go to their page.  If you want to add fea
 
 Our branching strategy is thus:
 
-Changes, including merges from upstream, go in *dev*.
-When we need/want to update, we merge *dev* to *staging* and our QA team verifies the build is happy.
-When they give us the green light, we merge to *prod* and deploy.
+- Changes, including merges from upstream, go in **dev**.
+- When we need/want to update, we merge **dev** to **staging** and our QA team verifies the build is happy.
+- When QA gives us the green light, we merge to **prod** and deploy.
 
 ## License
 
