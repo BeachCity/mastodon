@@ -10,3 +10,44 @@ All changes to Beach City beyond the vanilla Beach City code will be documented 
 
 ## Changed
 - Moved CW option to the right of the post federation button
+
+
+=======
+## [1.4.2] - 2019-05-22
+## Changed
+- Changed "instances" to "servers" in language around federation
+- Described profile as "public" in description of unlisted option to clarify that your profile is public.
+- Updated README
+
+=======
+## [1.4.1] - 2019-05-07
+## Changed
+- Modified the language around post privacy to clarify what each option does and how they differ.
+
+=======
+## [1.4.0] - 2019-05-06
+## Added
+- Cherry picked ability to change the federation status of a post to local-only.
+
+=======
+## [1.3.0] - 2019-04-16
+## Added
+- Alva added the ability to user browser fonts instead of system fonts.
+
+## Changed
+- Changed language around system fonts to be about browser fonts
+
+=======
+## [1.1.0] - 2019-04-11
+## Changed
+- Changed signup prompt to be more Beach City Centric.
+
+=======
+## [1.0.0] - 
+## Added
+- Favicon for Beach City
+- Beach City Theme
+- Reference to Beach City Github
+
+## Changed
+- Bio length to 500 characters
