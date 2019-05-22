@@ -7,3 +7,6 @@ All changes to Beach City beyond the vanilla Beach City code will be documented 
 ## [1.5.0] - 2019-05-22
 ### Added
 - Added Drawing tool from Glitch.soc
+
+## Changed
+- Moved CW option to the right of the post federation button
