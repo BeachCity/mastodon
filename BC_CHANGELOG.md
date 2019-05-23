@@ -4,9 +4,9 @@ Changelog
 All changes to Beach City beyond the vanilla Beach City code will be documented here.
 
 =======
-## [1.5.1] - 2019-05-??
+## [1.6.0] - 2019-05-??
 ## Added
-- Added an opt-in setting for the doodle pad, under a new "mods" settings section
+- Simplified versions of existing themes with a single column.
 
 ## Changed
 - Changed Drawing tool icon to a paint brush
