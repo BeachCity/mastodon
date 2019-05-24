@@ -856,7 +856,6 @@ ActiveRecord::Schema.define(version: 2021_06_30_000137) do
     t.string "uri", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "by_moderator"
     t.index ["account_id"], name: "index_tombstones_on_account_id"
     t.index ["uri"], name: "index_tombstones_on_uri"
   end
