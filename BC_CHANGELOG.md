@@ -1,7 +1,7 @@
 Changelog
 =========
 
-All changes to Beach City beyond the vanilla Beach City code will be documented here.
+All changes to Beach City beyond the vanilla Mastodon code will be documented here.
 
 ## [1.6.0] - 2019-05-??
 =======
