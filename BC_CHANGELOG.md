@@ -9,6 +9,7 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 - Added option to keep CW input open all the time
 
 ### Changed
+- Reorganized preferences page to have headers and have more commonly used options on top
 - Increase privacy in default settings for new users
 
 ### Fixed
@@ -33,7 +34,7 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 ### Added
 - Added Drawing tool from Glitch.soc
 
-## Changed
+### Changed
 - Moved CW option to the right of the post federation button
 
 
