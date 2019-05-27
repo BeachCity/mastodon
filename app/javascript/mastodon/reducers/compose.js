@@ -53,14 +53,14 @@ import {
 import { REDRAFT } from '../actions/statuses';
 import { STORE_HYDRATE } from '../actions/store';
 import { TIMELINE_DELETE } from '../actions/timelines';
-import { me } from '../initial_state';
+import { me, enableAlwaysShowSpoiler } from '../initial_state';
 import { unescapeHTML } from '../utils/html';
 import { uuid } from '../uuid';
 
 const initialState = ImmutableMap({
   mounted: 0,
   sensitive: false,
-  spoiler: false,
+  spoiler: false || enableAlwaysShowSpoiler,
   spoiler_text: '',
   privacy: null,
   id: null,
@@ -116,7 +116,7 @@ function clearAll(state) {
   return state.withMutations(map => {
     map.set('id', null);
     map.set('text', '');
-    map.set('spoiler', false);
+    map.set('spoiler', false || enableAlwaysShowSpoiler);
     map.set('spoiler_text', '');
     map.set('is_submitting', false);
     map.set('is_changing_upload', false);
