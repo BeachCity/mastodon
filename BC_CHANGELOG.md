@@ -2,10 +2,14 @@ Changelog
 =========
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
+=======
 ## [1.7.0] - 2019-??-??
 
 ### Added
 - Added option to keep CW input open all the time
+
+### Changed
+- Increase privacy in default settings for new users
 
 ### Fixed
 - Put "default federation" and "local-only" options next to each other
