@@ -836,7 +836,7 @@ en:
     delete: Delete
     no_batch_actions_available: No batch actions available on this page
     order_by: Order by
-    save_changes: Save changes
+    save_changes: Save all changes
     save: Save
     validation_errors:
       one: Something isn't quite right yet! Please review the error below
