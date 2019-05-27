@@ -240,6 +240,7 @@ class Formatter
     return link_to_instagram(username) if domain == "instagram.com"
     return link_to_github(username) if domain == "github.com"
     return link_to_telegram(username) if ["telegram.org", "t.me"].include? domain
+    return link_to_soundcloud(username) if domain == "soundcloud.com"
     return link_to_account(acct, options) unless linkable_accounts
 
     same_username_hits = 0
@@ -306,6 +307,10 @@ class Formatter
 
   def link_to_telegram(username)
     "<span class=\"h-card\"><a href=\"https://t.me/#{username}\" title=\"#{username}@t.me\" rel=\"noopener noreferrer\" class=\"u-url mention\">@<span>#{username}</span></a></span>"
+  end
+  
+  def link_to_soundcloud(username)
+    "<span class=\"h-card\"><a href=\"https://soundcloud.com/#{username}\" title=\"#{username}@soundcloud.com\" rel=\"noopener noreferrer\" class=\"u-url mention\">@<span>#{username}</span></a></span>"
   end
 
 end
