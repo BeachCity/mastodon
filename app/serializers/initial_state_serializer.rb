@@ -33,7 +33,7 @@ class InitialStateSerializer < ActiveModel::Serializer
       store[:reduce_motion]   = object.current_account.user.setting_reduce_motion
       store[:enable_doodle]   = object.current_account.user.setting_enable_doodle
       store[:enable_federation_dropdown] = object.current_account.user.setting_enable_federation_dropdown
-      store[:enable_always_show_cw] = object.current_account.user.setting_enable_always_show_cw
+      store[:enable_always_show_spoiler] = object.current_account.user.setting_enable_always_show_spoiler
       store[:is_staff]        = object.current_account.user.staff?
     end
 

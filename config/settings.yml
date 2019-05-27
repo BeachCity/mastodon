@@ -61,7 +61,7 @@ defaults: &defaults
   show_known_fediverse_at_about_page: true
   enable_doodle: false
   enable_federation_dropdown: true
-  enable_always_show_cw: true
+  enable_always_show_spoiler: true
 
 development:
   <<: *defaults
