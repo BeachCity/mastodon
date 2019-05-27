@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import TextIconButton from '../components/text_icon_button';
 import { changeComposeSpoilerness } from '../../../actions/compose';
 import { injectIntl, defineMessages } from 'react-intl';
+import { enableAlwaysShowSpoiler } from '../../../initial_state';
 
 const messages = defineMessages({
   marked: { id: 'compose_form.spoiler.marked', defaultMessage: 'Text is hidden behind warning' },
@@ -13,6 +14,7 @@ const mapStateToProps = (state, { intl }) => ({
   title: intl.formatMessage(state.getIn(['compose', 'spoiler']) ? messages.marked : messages.unmarked),
   active: state.getIn(['compose', 'spoiler']),
   ariaControls: 'cw-spoiler-input',
+  unavailable: enableAlwaysShowSpoiler
 });
 
 const mapDispatchToProps = dispatch => ({
