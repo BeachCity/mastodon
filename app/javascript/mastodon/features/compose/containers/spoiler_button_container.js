@@ -1,4 +1,5 @@
 import { injectIntl, defineMessages } from 'react-intl';
+import { enableAlwaysShowSpoiler } from '../../../initial_state';
 
 import { connect } from 'react-redux';
 
@@ -15,6 +16,7 @@ const mapStateToProps = (state, { intl }) => ({
   title: intl.formatMessage(state.getIn(['compose', 'spoiler']) ? messages.marked : messages.unmarked),
   active: state.getIn(['compose', 'spoiler']),
   ariaControls: 'cw-spoiler-input',
+  unavailable: enableAlwaysShowSpoiler
 });
 
 const mapDispatchToProps = dispatch => ({
