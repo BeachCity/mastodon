@@ -5,7 +5,7 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 ## [1.7.0] - 2019-??-??
 
 ### Added
-- Added option to keep CW open all the time
+- Added option to keep CW input open all the time
 
 ### Fixed
 - Put "default federation" and "local-only" options next to each other
