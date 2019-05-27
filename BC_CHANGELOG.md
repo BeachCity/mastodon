@@ -3,6 +3,12 @@ Changelog
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
 
+
+## [1.7.0] - 2019-??-??
+### Fixed
+- Put "default federation" and "local-only" options next to each other
+
+=======
 ## [1.6.0] - 2019-05-25
 
 ## Added
