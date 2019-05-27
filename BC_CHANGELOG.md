@@ -5,6 +5,10 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 
 
 ## [1.7.0] - 2019-??-??
+
+### Changed
+- Increase privacy in default settings for new users
+
 ### Fixed
 - Put "default federation" and "local-only" options next to each other
 
