@@ -10,6 +10,7 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 
 ### Changed
 - Reorganized preferences page to have headers and have more commonly used options on top
+- Increase privacy in default settings for new users
 
 ### Fixed
 - Put "default federation" and "local-only" options next to each other
