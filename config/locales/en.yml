@@ -1207,10 +1207,7 @@ en:
     deselect: Deselect all
     none: None
     order_by: Order by
-    save_changes: Save changes
-    select_all_matching_items:
-      one: Select %{count} item matching your search.
-      other: Select all %{count} items matching your search.
+    save_changes: Save all changes
     today: today
     save: Save
     validation_errors:
