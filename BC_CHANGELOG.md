@@ -7,6 +7,7 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 
 ### Added
 - Added option to keep CW input open all the time
+- Using names for off-fediverse users now works!
 
 ### Changed
 - Increase privacy in default settings for new users
