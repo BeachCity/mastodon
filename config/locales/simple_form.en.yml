@@ -113,7 +113,7 @@ en:
         setting_show_application: Disclose application used to send toots
         setting_enable_doodle: Enable doodle option
         setting_enable_federation_dropdown: Enable "local-only" option
-        setting_enable_always_show_cw: Always show content warning input field
+        setting_enable_always_show_cw: Always show CW field
         setting_system_font_ui: Use browser's default font
         setting_theme: Site theme
         setting_unfollow_modal: Show confirmation dialog before unfollowing someone
