@@ -1126,7 +1126,7 @@ en:
     delete: Delete
     none: None
     order_by: Order by
-    save_changes: Save changes
+    save_changes: Save all changes
     today: today
     save: Save
     validation_errors:
