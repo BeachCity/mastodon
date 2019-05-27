@@ -15,10 +15,15 @@ export default class TextIconButton extends PureComponent {
     active: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
     ariaControls: PropTypes.string,
+    unavailable: PropTypes.bool
   };
 
   render () {
-    const { label, title, active, ariaControls } = this.props;
+    const { label, title, active, ariaControls, unavailable } = this.props;
+
+    if (unavailable) {
+      return null;
+    }
 
     return (
       <button
