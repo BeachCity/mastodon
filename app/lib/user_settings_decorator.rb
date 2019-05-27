@@ -36,6 +36,7 @@ class UserSettingsDecorator
     user.settings['show_application']    = show_application_preference if change?('setting_show_application')
     user.settings['enable_doodle']       = enable_doodle_preference if change?('setting_enable_doodle')
     user.settings['enable_federation_dropdown']   = enable_federation_dropdown_preference if change?('setting_enable_federation_dropdown')
+    user.settings['enable_always_show_cw'] = enable_always_show_cw_preference if change?('setting_enable_always_show_cw')
   end
 
   def merged_notification_emails
@@ -108,6 +109,10 @@ class UserSettingsDecorator
   
   def enable_federation_dropdown_preference
     boolean_cast_setting 'setting_enable_federation_dropdown'
+  end
+
+  def enable_always_show_cw_preference
+    boolean_cast_setting 'setting_enable_always_show_cw'
   end
 
   def theme_preference

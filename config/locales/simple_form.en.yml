@@ -37,6 +37,7 @@ en:
         setting_show_application: The application you use to toot will be displayed in the detailed view of your toots
         setting_enable_doodle: Shows the Doodle option for posts
         setting_enable_federation_dropdown: Shows the federation dropdown for posts, allowing setting posts to local-only
+        setting_enable_always_show_cw: Always shows the content warning field and removes the button to hide/show it
         setting_theme: Affects how Mastodon looks when you're logged in from any device.
         username: Your username will be unique on %{domain}
         whole_word: When the keyword or phrase is alphanumeric only, it will only be applied if it matches the whole word
@@ -112,6 +113,7 @@ en:
         setting_show_application: Disclose application used to send toots
         setting_enable_doodle: Enable doodle option
         setting_enable_federation_dropdown: Enable "local-only" option
+        setting_enable_always_show_cw: Always show content warning input field
         setting_system_font_ui: Use browser's default font
         setting_theme: Site theme
         setting_unfollow_modal: Show confirmation dialog before unfollowing someone
