@@ -10,12 +10,11 @@ import {
   insertEmojiCompose,
   uploadCompose,
 } from '../../../actions/compose';
-import { enableAlwaysShowSpoiler } from '../../../initial_state';
 
 const mapStateToProps = state => ({
   text: state.getIn(['compose', 'text']),
   suggestions: state.getIn(['compose', 'suggestions']),
-  spoiler: state.getIn(['compose', 'spoiler']) || enableAlwaysShowSpoiler,
+  spoiler: state.getIn(['compose', 'spoiler']),
   spoilerText: state.getIn(['compose', 'spoiler_text']),
   privacy: state.getIn(['compose', 'privacy']),
   federation: state.getIn(['compose', 'federation']),

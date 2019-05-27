@@ -43,13 +43,13 @@ import { STORE_HYDRATE } from '../actions/store';
 import { REDRAFT } from '../actions/statuses';
 import { Map as ImmutableMap, List as ImmutableList, OrderedSet as ImmutableOrderedSet, fromJS } from 'immutable';
 import uuid from '../uuid';
-import { me } from '../initial_state';
+import { me, enableAlwaysShowSpoiler } from '../initial_state';
 import { unescapeHTML } from '../utils/html';
 
 const initialState = ImmutableMap({
   mounted: 0,
   sensitive: false,
-  spoiler: false,
+  spoiler: false || enableAlwaysShowSpoiler,
   spoiler_text: '',
   privacy: null,
   federation: null,
@@ -105,7 +105,7 @@ function statusToTextMentions(state, status) {
 function clearAll(state) {
   return state.withMutations(map => {
     map.set('text', '');
-    map.set('spoiler', false);
+    map.set('spoiler', false || enableAlwaysShowSpoiler);
     map.set('spoiler_text', '');
     map.set('is_submitting', false);
     map.set('is_changing_upload', false);
