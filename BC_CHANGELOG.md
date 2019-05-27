@@ -2,9 +2,13 @@ Changelog
 =========
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
-
+## [1.7.0] - 2019-??-??
 =======
 ## [1.7.0] - 2019-??-??
+
+### Added
+- Added option to keep CW open all the time
+
 ### Fixed
 - Put "default federation" and "local-only" options next to each other
 
