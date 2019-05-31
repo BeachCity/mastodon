@@ -7,6 +7,7 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 
 ### Added
 - Added option to keep CW input open all the time
+- Added Win95 theme from cybre.space
 - Using names for off-fediverse users now works!
 
 ### Changed
