@@ -3,6 +3,12 @@ Changelog
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
 =======
+## [1.7.1] - 2019-??-??
+
+### Fixed
+- Local only toots do not appear in the federated timeline
+
+===================================================================================
 ## [1.7.0] - 2019-??-??
 
 ### Added
