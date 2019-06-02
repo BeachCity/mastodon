@@ -102,6 +102,8 @@ class Status < ApplicationRecord
     end
   }
 
+  scope :not_local_only, -> { where(local_only: [false, nil]) }
+
   cache_associated :application,
                    :media_attachments,
                    :conversation,
