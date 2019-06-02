@@ -109,6 +109,8 @@ class Status < ApplicationRecord
     where('NOT EXISTS (SELECT * FROM statuses_tags forbidden WHERE forbidden.status_id = statuses.id AND forbidden.tag_id IN (?))', tag_ids)
   }
 
+  scope :not_local_only, -> { where(local_only: [false, nil]) }
+
   cache_associated :application,
                    :media_attachments,
                    :conversation,
