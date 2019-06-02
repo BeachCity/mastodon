@@ -3,7 +3,7 @@ Changelog
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
 =======
-## [1.7.0] - 2019-??-??
+## [1.7.0] - 2019-06-03
 
 ### Added
 - Added option to keep CW input open all the time
