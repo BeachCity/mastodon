@@ -18,7 +18,7 @@ defaults: &defaults
   show_staff_badge: true
   default_sensitive: false
   default_federation: true
-  hide_network: false
+  hide_network: true
   unfollow_modal: false
   boost_modal: false
   delete_modal: true
@@ -29,7 +29,7 @@ defaults: &defaults
   reduce_motion: false
   show_application: true
   system_font_ui: false
-  noindex: false
+  noindex: true
   theme: 'default'
   aggregate_reblogs: true
   notification_emails:
@@ -61,6 +61,7 @@ defaults: &defaults
   show_known_fediverse_at_about_page: true
   enable_doodle: false
   enable_federation_dropdown: true
+  enable_always_show_spoiler: true
 
 development:
   <<: *defaults
