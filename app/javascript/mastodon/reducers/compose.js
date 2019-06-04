@@ -245,6 +245,7 @@ export default function compose(state = initialState, action) {
       if (enableAlwaysShowSpoiler) {
         const existsSpoilerText = action.text.length > 0;
         if (existsSpoilerText) {
+          // Don't automatically turn off image sensitivity if we had a CW in there.
           map.set('sensitive', true);
         }
         map.set('force_sensitive', existsSpoilerText);
@@ -282,7 +283,7 @@ export default function compose(state = initialState, action) {
         map.set('spoiler_text', action.status.get('spoiler_text'));
         map.set('force_sensitive', true);
       } else {
-        map.set('spoiler', !enableAlwaysShowSpoiler);
+        map.set('spoiler', enableAlwaysShowSpoiler);
         map.set('spoiler_text', '');
         map.set('force_sensitive', false);
       }
