@@ -12,7 +12,7 @@ const messages = defineMessages({
 
 const mapStateToProps = state => ({
   active: state.getIn(['compose', 'sensitive']),
-  disabled: state.getIn(['compose', 'spoiler']),
+  disabled: state.getIn(['compose', 'force_sensitive']),
 });
 
 const mapDispatchToProps = dispatch => ({
