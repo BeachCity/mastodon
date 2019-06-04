@@ -49,7 +49,7 @@ import { unescapeHTML } from '../utils/html';
 const initialState = ImmutableMap({
   mounted: 0,
   sensitive: false,
-  spoiler: false || enableAlwaysShowSpoiler,
+  spoiler: enableAlwaysShowSpoiler,
   spoiler_text: '',
   privacy: null,
   federation: null,
@@ -105,7 +105,7 @@ function statusToTextMentions(state, status) {
 function clearAll(state) {
   return state.withMutations(map => {
     map.set('text', '');
-    map.set('spoiler', false || enableAlwaysShowSpoiler);
+    map.set('spoiler', enableAlwaysShowSpoiler);
     map.set('spoiler_text', '');
     map.set('is_submitting', false);
     map.set('is_changing_upload', false);
@@ -128,7 +128,9 @@ function appendMedia(state, media) {
     map.set('resetFileKey', Math.floor((Math.random() * 0x10000)));
     map.set('idempotencyKey', uuid());
 
-    if (prevSize === 0 && (state.get('default_sensitive') || state.get('spoiler'))) {
+    const isSpoilerActive = enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler');
+
+    if (prevSize === 0 && (state.get('default_sensitive') || isSpoilerActive)) {
       map.set('sensitive', true);
     }
   });
@@ -221,7 +223,8 @@ export default function compose(state = initialState, action) {
       .set('is_composing', false);
   case COMPOSE_SENSITIVITY_CHANGE:
     return state.withMutations(map => {
-      if (!state.get('spoiler')) {
+      const isSpoilerActive = enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler');
+      if (!isSpoilerActive) {
         map.set('sensitive', !state.get('sensitive'));
       }
 
@@ -238,9 +241,13 @@ export default function compose(state = initialState, action) {
       }
     });
   case COMPOSE_SPOILER_TEXT_CHANGE:
-    return state
-      .set('spoiler_text', action.text)
-      .set('idempotencyKey', uuid());
+    return state.withMutations(map => {
+      if (enableAlwaysShowSpoiler && action.text.length > 0) {
+        map.set('sensitive', true);
+      }
+      map.set('spoiler_text', action.text);
+      map.set('idempotencyKey', uuid());
+    });
   case COMPOSE_FEDERATION_CHANGE:
     return state
       .set('federation', action.value)
@@ -270,7 +277,7 @@ export default function compose(state = initialState, action) {
         map.set('spoiler', true);
         map.set('spoiler_text', action.status.get('spoiler_text'));
       } else {
-        map.set('spoiler', false);
+        map.set('spoiler', !enableAlwaysShowSpoiler);
         map.set('spoiler_text', '');
       }
     });
@@ -279,7 +286,7 @@ export default function compose(state = initialState, action) {
     return state.withMutations(map => {
       map.set('in_reply_to', null);
       map.set('text', '');
-      map.set('spoiler', false);
+      map.set('spoiler', enableAlwaysShowSpoiler);
       map.set('spoiler_text', '');
       map.set('privacy', state.get('default_privacy'));
       map.set('poll', null);
@@ -364,7 +371,7 @@ export default function compose(state = initialState, action) {
         map.set('spoiler', true);
         map.set('spoiler_text', action.status.get('spoiler_text'));
       } else {
-        map.set('spoiler', false);
+        map.set('spoiler', !enableAlwaysShowSpoiler);
         map.set('spoiler_text', '');
       }
 
