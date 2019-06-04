@@ -9,7 +9,7 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 - Local only toots do not appear in the federated timeline
 
 ===================================================================================
-## [1.7.0] - 2019-??-??
+## [1.7.0] - 2019-06-03
 
 ### Added
 - Added option to keep CW input open all the time
