@@ -173,6 +173,14 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
     }
   },
 
+  onSetHidden(status, value) {
+    if (!value && status.get('hidden')) {
+      dispatch(revealStatus(status.get('id')));
+    } else if (value && !status.get('hidden')) {
+      dispatch(hideStatus(status.get('id')));
+    }
+  }
+
 });
 
 export default injectIntl(connect(makeMapStateToProps, mapDispatchToProps)(Status));

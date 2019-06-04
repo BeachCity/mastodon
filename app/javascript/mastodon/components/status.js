@@ -64,6 +64,7 @@ class Status extends ImmutablePureComponent {
     onEmbed: PropTypes.func,
     onHeightChange: PropTypes.func,
     onToggleHidden: PropTypes.func,
+    onSetHidden: PropTypes.func,
     muted: PropTypes.bool,
     hidden: PropTypes.bool,
     unread: PropTypes.bool,
@@ -198,6 +199,10 @@ class Status extends ImmutablePureComponent {
     this.props.onToggleHidden(this._properStatus());
   }
 
+  handleSetMediaVisible = (visible) => {
+    this.props.onSetHidden(this.props.status, !visible);
+  }
+
   _properStatus () {
     const { status } = this.props;
 
@@ -310,6 +315,7 @@ class Status extends ImmutablePureComponent {
                 media={status.get('media_attachments')}
                 sensitive={status.get('sensitive')}
                 height={110}
+                onSetMediaVisible={this.handleSetMediaVisible}
                 onOpenMedia={this.props.onOpenMedia}
                 cacheWidth={this.props.cacheMediaWidth}
                 defaultWidth={this.props.cachedMediaWidth}

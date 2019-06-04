@@ -244,6 +244,7 @@ class MediaGallery extends React.PureComponent {
     intl: PropTypes.object.isRequired,
     defaultWidth: PropTypes.number,
     cacheWidth: PropTypes.func,
+    onShowSensitiveMedia: PropTypes.func
   };
 
   static defaultProps = {
@@ -262,7 +263,9 @@ class MediaGallery extends React.PureComponent {
   }
 
   handleOpen = () => {
-    this.setState({ visible: !this.state.visible });
+    const newVisibility = !this.state.visible;
+    this.setState({ visible: newVisibility });
+    this.props.onSetMediaVisible(newVisibility);
   }
 
   handleClick = (index) => {
