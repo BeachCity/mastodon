@@ -3,6 +3,20 @@ Changelog
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
 =======
+<<<<<<< HEAD
+=======
+## [1.7.1] - 2019-??-??
+
+### Changed
+- Opening sensitive images now opens CW (but not vice versa) 
+
+### Fixed
+- Local only toots do not appear in the federated timeline
+- CW field no longer vanishes in certain conditions when always CW option is on
+- Image sensitivity can be changed when always CW option is on and text is deleted
+
+===================================================================================
+>>>>>>> 199cd2f47 (Adding planned changes for this branch)
 ## [1.7.0] - 2019-06-03
 
 ### Added
