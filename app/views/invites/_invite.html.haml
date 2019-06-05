@@ -1,7 +1,8 @@
 %tr
   %td
     - if @mobile
-      = public_invite_url(invite_code: invite.code)
+      %a{ href: public_invite_url(invite_code: invite.code), title: "Invite code" }
+        = public_invite_url(invite_code: invite.code)
     - else
       .input-copy
         .input-copy__wrapper
