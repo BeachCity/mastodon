@@ -349,7 +349,7 @@ const startWorker = (workerId) => {
     });
   };
 
-  const streamFrom = (id, req, output, attachCloseHandler, needsFiltering = false, notificationOnly = false) => {
+  const streamFrom = (id, req, output, attachCloseHandler, needsFiltering = false, notificationOnly = false, allowLocalOnly = false) => {
     const accountId = req.accountId || req.remoteAddress;
 
     const streamType = notificationOnly ? ' (notification)' : '';
@@ -372,7 +372,7 @@ const startWorker = (workerId) => {
       }
 
       // Only send local-only statuses to logged-in users
-      if (payload.local_only && !req.accountId) {
+      if (payload.local_only && !req.accountId || !allowLocalOnly) {
         log.silly(req.requestId, `Message ${payload.id} filtered because it was local-only`);
         return;
       }
@@ -534,7 +534,7 @@ const startWorker = (workerId) => {
     const onlyMedia = req.query.only_media === '1' || req.query.only_media === 'true';
     const channel   = onlyMedia ? 'timeline:public:local:media' : 'timeline:public:local';
 
-    streamFrom(channel, req, streamToHttp(req, res), streamHttpEnd(req), true);
+    streamFrom(channel, req, streamToHttp(req, res), streamHttpEnd(req), true, undefined, true);
   });
 
   app.get('/api/v1/streaming/direct', (req, res) => {
