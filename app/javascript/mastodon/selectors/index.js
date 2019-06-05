@@ -1,11 +1,12 @@
 import { createSelector } from 'reselect';
 import { List as ImmutableList } from 'immutable';
-import { me } from '../initial_state';
+import { me, enableAlwaysShowSpoiler } from '../initial_state';
 
 const getAccountBase         = (state, id) => state.getIn(['accounts', id], null);
 const getAccountCounters     = (state, id) => state.getIn(['accounts_counters', id], null);
 const getAccountRelationship = (state, id) => state.getIn(['relationships', id], null);
 const getAccountMoved        = (state, id) => state.getIn(['accounts', state.getIn(['accounts', id, 'moved'])]);
+
 
 export const makeGetAccount = () => {
   return createSelector([getAccountBase, getAccountCounters, getAccountRelationship, getAccountMoved], (base, counters, relationship, moved) => {
@@ -138,3 +139,10 @@ export const getAccountGallery = createSelector([
 
   return medias;
 });
+
+export const getForceSensitive = createSelector([
+    (state) => state.getIn(['compose', 'spoiler']),
+    (state) => state.getIn(['compose', 'spoiler_text'])
+  ], (spoiler, spoilerText) => {
+    return enableAlwaysShowSpoiler ? spoilerText.length > 0 : spoiler;
+  });

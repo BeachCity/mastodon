@@ -49,7 +49,6 @@ import { unescapeHTML } from '../utils/html';
 const initialState = ImmutableMap({
   mounted: 0,
   sensitive: false,
-  force_sensitive: false,
   spoiler: enableAlwaysShowSpoiler,
   spoiler_text: '',
   privacy: null,
@@ -108,7 +107,6 @@ function clearAll(state) {
     map.set('text', '');
     map.set('spoiler', enableAlwaysShowSpoiler);
     map.set('spoiler_text', '');
-    map.set('sensitivity_change_disabled', false);
     map.set('is_submitting', false);
     map.set('is_changing_upload', false);
     map.set('in_reply_to', null);
@@ -130,7 +128,7 @@ function appendMedia(state, media) {
     map.set('resetFileKey', Math.floor((Math.random() * 0x10000)));
     map.set('idempotencyKey', uuid());
 
-    if (prevSize === 0 && (state.get('default_sensitive') || state.get('force_sensitive'))) {
+    if (prevSize === 0 && (state.get('default_sensitive') || getForceSensitive(state))) {
       map.set('sensitive', true);
     }
   });
@@ -147,6 +145,10 @@ function removeMedia(state, mediaId) {
       map.set('sensitive', false);
     }
   });
+};
+
+function getForceSensitive(state) {
+  return enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler')
 };
 
 const insertSuggestion = (state, position, token, completion) => {
@@ -223,7 +225,7 @@ export default function compose(state = initialState, action) {
       .set('is_composing', false);
   case COMPOSE_SENSITIVITY_CHANGE:
     return state.withMutations(map => {
-      if (!state.get('force_sensitive')) {
+      if (!getForceSensitive(state)) {
         map.set('sensitive', !state.get('sensitive'));
       }
 
@@ -235,20 +237,17 @@ export default function compose(state = initialState, action) {
       map.set('spoiler', !state.get('spoiler'));
       map.set('idempotencyKey', uuid());
 
-      if (!state.get('sensitive') && state.get('media_attachments').size >= 1) {
-        map.set('sensitive', true);
-        map.set('force_sensitive', true);
+      if (state.get('media_attachments').size >= 1) {
+        if (!state.get('sensitive')) {
+          map.set('sensitive', true);
+        }
       }
     });
   case COMPOSE_SPOILER_TEXT_CHANGE:
     return state.withMutations(map => {
-      if (enableAlwaysShowSpoiler) {
-        const existsSpoilerText = action.text.length > 0;
-        if (existsSpoilerText) {
-          // Don't automatically turn off image sensitivity if we had a CW in there.
-          map.set('sensitive', true);
-        }
-        map.set('force_sensitive', existsSpoilerText);
+      if (getForceSensitive(state) || (enableAlwaysShowSpoiler && action.text.length > 0)) {
+        // Don't automatically turn off image sensitivity if we had a CW in there.
+        map.set('sensitive', true);
       }
       map.set('spoiler_text', action.text);
       map.set('idempotencyKey', uuid());
@@ -281,11 +280,10 @@ export default function compose(state = initialState, action) {
       if (action.status.get('spoiler_text').length > 0) {
         map.set('spoiler', true);
         map.set('spoiler_text', action.status.get('spoiler_text'));
-        map.set('force_sensitive', true);
+        map.set('sensitive', true);
       } else {
         map.set('spoiler', enableAlwaysShowSpoiler);
         map.set('spoiler_text', '');
-        map.set('force_sensitive', false);
       }
     });
   case COMPOSE_REPLY_CANCEL:
@@ -295,7 +293,6 @@ export default function compose(state = initialState, action) {
       map.set('text', '');
       map.set('spoiler', enableAlwaysShowSpoiler);
       map.set('spoiler_text', '');
-      map.set('force_sensitive', false);
       map.set('privacy', state.get('default_privacy'));
       map.set('poll', null);
       map.set('federation', state.get('default_federation'));
@@ -378,11 +375,9 @@ export default function compose(state = initialState, action) {
       if (action.status.get('spoiler_text').length > 0) {
         map.set('spoiler', true);
         map.set('spoiler_text', action.status.get('spoiler_text'));
-        map.set('force_sensitive', true);
       } else {
         map.set('spoiler', !enableAlwaysShowSpoiler);
         map.set('spoiler_text', '');
-        map.set('force_sensitive', false);
       }
 
       if (action.status.get('poll')) {

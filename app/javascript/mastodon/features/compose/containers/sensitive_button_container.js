@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { changeComposeSensitivity } from 'mastodon/actions/compose';
 import { injectIntl, defineMessages, FormattedMessage } from 'react-intl';
+import { enableAlwaysShowSpoiler } from '../../../initial_state';
 
 const messages = defineMessages({
   marked: { id: 'compose_form.sensitive.marked', defaultMessage: 'Media is marked as sensitive' },
@@ -12,7 +13,7 @@ const messages = defineMessages({
 
 const mapStateToProps = state => ({
   active: state.getIn(['compose', 'sensitive']),
-  disabled: state.getIn(['compose', 'force_sensitive']),
+  disabled: enableAlwaysShowSpoiler ? state.getIn(['compose', 'spoiler_text']).length > 0 : state.getIn(['compose', 'spoiler']),
 });
 
 const mapDispatchToProps = dispatch => ({
