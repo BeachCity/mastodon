@@ -13,6 +13,7 @@ class InvitesController < ApplicationController
 
     @invites = invites
     @invite  = Invite.new
+    @mobile = current_session.detection.device.mobile?
   end
 
   def create
