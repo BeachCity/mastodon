@@ -13,6 +13,7 @@ en_GB:
         autofollow: People who sign up through the invite will automatically follow you
         avatar: PNG, GIF or JPG. At most %{size}. Will be downscaled to %{dimensions}px
         bot: This account mainly performs automated actions and might not be monitored
+        bot_identified: This account belongs to someone who is a bot and whose content is not automated
         context: One or multiple contexts where the filter should apply
         digest: Only sent after a long period of inactivity and only if you have received any personal messages in your absence
         discoverable_html: The <a href="%{path}" target="_blank">directory</a> lets people find accounts based on interests and activity. Requires at least %{min_followers} followers
@@ -68,7 +69,8 @@ en_GB:
       defaults:
         autofollow: Invite to follow your account
         avatar: Avatar
-        bot: This is a bot account
+        bot: This account is automated
+        bot_identified: I am a bot
         chosen_languages: Filter languages
         confirm_new_password: Confirm new password
         confirm_password: Confirm password

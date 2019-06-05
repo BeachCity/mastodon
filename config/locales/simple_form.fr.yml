@@ -13,6 +13,7 @@ fr:
         autofollow: Les personnes qui s’inscrivent grâce à l’invitation vous suivront automatiquement
         avatar: Au format PNG, GIF ou JPG. %{size} maximum. Sera réduit à %{dimensions}px
         bot: Ce compte exécute principalement des actions automatisées et pourrait ne pas être surveillé
+        bot_identified: Ce compte appartient à quelqu'un qui est un bot et dont le contenu n'est pas automatisé
         context: Un ou plusieurs contextes où le filtre devrait s’appliquer
         digest: Uniquement envoyé après une longue période d’inactivité et uniquement si vous avez reçu des messages personnels pendant votre absence
         discoverable_html: L'<a href="%{path}" target="_blank">annuaire</a> permet aux gens de trouver des comptes en se basant sur les intérêts et les activités. Nécessite au moins %{min_followers} abonnés
@@ -65,7 +66,8 @@ fr:
       defaults:
         autofollow: Invitation à suivre votre compte
         avatar: Image de profil
-        bot: Ceci est un robot
+        bot: Ce compte est automatisé
+        bot_identified: Ceci est un robot
         chosen_languages: Filtrer les langues
         confirm_new_password: Confirmation du nouveau mot de passe
         confirm_password: Confirmation du mot de passe

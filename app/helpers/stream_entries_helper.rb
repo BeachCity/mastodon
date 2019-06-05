@@ -35,7 +35,7 @@ module StreamEntriesHelper
   end
 
   def account_badge(account, all: false)
-    if account.bot?
+    if account.bot? || account.bot_identified?
       content_tag(:div, content_tag(:div, t('accounts.roles.bot'), class: 'account-role bot'), class: 'roles')
     elsif (Setting.show_staff_badge && account.user_staff?) || all
       content_tag(:div, class: 'roles') do

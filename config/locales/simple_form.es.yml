@@ -6,6 +6,7 @@ es:
         autofollow: Los usuarios que se registren mediante la invitación te seguirán automáticamente
         avatar: PNG, GIF o JPG. Máximo %{size}. Será escalado a %{dimensions}px
         bot: Esta cuenta ejecuta principalmente acciones automatizadas y podría no ser monitorizada
+        bot_identified: Esta cuenta pertenece a alguien que es un bot y cuyo contenido no está automatizado
         context: Uno o múltiples contextos en los que debe aplicarse el filtro
         digest: Solo enviado tras un largo periodo de inactividad y solo si has recibido mensajes personales durante tu ausencia
         fields: Puedes tener hasta 4 elementos mostrándose como una tabla en tu perfil
@@ -35,7 +36,8 @@ es:
       defaults:
         autofollow: Invitar a seguir tu cuenta
         avatar: Avatar
-        bot: Esta es una cuenta bot
+        bot: Esta cuenta está automatizada
+        bot_identified: Soy un bot
         chosen_languages: Filtrar idiomas
         confirm_new_password: Confirmar nueva contraseña
         confirm_password: Confirmar contraseña

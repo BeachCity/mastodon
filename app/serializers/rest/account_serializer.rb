@@ -3,7 +3,7 @@
 class REST::AccountSerializer < ActiveModel::Serializer
   include RoutingHelper
 
-  attributes :id, :username, :acct, :display_name, :locked, :bot, :created_at,
+  attributes :id, :username, :acct, :display_name, :locked, :bot, :bot_identified, :created_at,
              :note, :url, :avatar, :avatar_static, :header, :header_static,
              :followers_count, :following_count, :statuses_count
 
