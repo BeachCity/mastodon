@@ -128,7 +128,7 @@ function appendMedia(state, media) {
     map.set('resetFileKey', Math.floor((Math.random() * 0x10000)));
     map.set('idempotencyKey', uuid());
 
-    if (prevSize === 0 && (state.get('default_sensitive') || getForceSensitive(state))) {
+    if (prevSize === 0 && (state.get('default_sensitive') || isSpoilerActive(state))) {
       map.set('sensitive', true);
     }
   });
@@ -147,7 +147,7 @@ function removeMedia(state, mediaId) {
   });
 };
 
-function getForceSensitive(state) {
+function isSpoilerActive(state) {
   return enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler')
 };
 
@@ -225,7 +225,7 @@ export default function compose(state = initialState, action) {
       .set('is_composing', false);
   case COMPOSE_SENSITIVITY_CHANGE:
     return state.withMutations(map => {
-      if (!getForceSensitive(state)) {
+      if (!isSpoilerActive(state)) {
         map.set('sensitive', !state.get('sensitive'));
       }
 
@@ -245,7 +245,7 @@ export default function compose(state = initialState, action) {
     });
   case COMPOSE_SPOILER_TEXT_CHANGE:
     return state.withMutations(map => {
-      if (getForceSensitive(state) || (enableAlwaysShowSpoiler && action.text.length > 0)) {
+      if (isSpoilerActive(state) || (enableAlwaysShowSpoiler && action.text.length > 0)) {
         // Don't automatically turn off image sensitivity if we had a CW in there.
         map.set('sensitive', true);
       }
