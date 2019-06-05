@@ -237,10 +237,8 @@ export default function compose(state = initialState, action) {
       map.set('spoiler', !state.get('spoiler'));
       map.set('idempotencyKey', uuid());
 
-      if (state.get('media_attachments').size >= 1) {
-        if (!state.get('sensitive')) {
-          map.set('sensitive', true);
-        }
+      if (!state.get('sensitive') && state.get('media_attachments').size >= 1) {
+        map.set('sensitive', true);
       }
     });
   case COMPOSE_SPOILER_TEXT_CHANGE:
