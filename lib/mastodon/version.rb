@@ -29,7 +29,11 @@ module Mastodon
     end
 
     def suffix
+<<<<<<< HEAD
       '+beachcity1.7.0'
+=======
+      '+beachcity1.7.2'
+>>>>>>> f15ae7822 (Updated Beach City version to 1.7.2)
     end
 
     def to_s
