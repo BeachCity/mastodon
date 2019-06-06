@@ -64,7 +64,7 @@ export function normalizeStatus(status, normalOldStatus) {
     normalStatus.contentHtml  = emojify(normalStatus.content, emojiMap);
     normalStatus.spoilerHtml  = emojify(escapeTextContentForBrowser(spoilerText), emojiMap);
     normalStatus.hidden       = expandSpoilers ? false : spoilerText.length > 0 || normalStatus.sensitive;
-    normalStatus.media_hidden = normalStatus.sensitive;
+    normalStatus.media_hidden = (displayMedia === 'hide_all' || normalStatus.sensitive) && displayMedia !== 'show_all';
   }
 
   return normalStatus;
