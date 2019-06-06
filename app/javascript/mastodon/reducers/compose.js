@@ -277,7 +277,7 @@ export default function compose(state = initialState, action) {
         map.set('spoiler', true);
         map.set('spoiler_text', action.status.get('spoiler_text'));
       } else {
-        map.set('spoiler', !enableAlwaysShowSpoiler);
+        map.set('spoiler', enableAlwaysShowSpoiler);
         map.set('spoiler_text', '');
       }
     });
