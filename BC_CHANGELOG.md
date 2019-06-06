@@ -2,11 +2,15 @@ Changelog
 =========
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
 ## [1.7.1] - 2019-??-??
+=======
+## [1.8.0] - 2019-06-??
+>>>>>>> e6520f0c7 (With bot changes, this becomes a 1.8.0 release)
 
 ### Added
 - You can now mark yourself as a bot without being treated as a source of potentially automated and unmonitored content
