@@ -590,8 +590,9 @@ RSpec.describe Status, type: :model do
 
       context 'with a viewer' do
         let(:viewer) { Fabricate(:account, username: 'viewer') }
-        it 'excludes local-only statuses' do
-          expect(subject).to_not include(status)
+
+        it 'includes local-only statuses' do
+          expect(subject).to include(status)
         end
       end
 
