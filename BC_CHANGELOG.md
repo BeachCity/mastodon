@@ -21,9 +21,12 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 - Image sensitivity can be changed when always CW option is on and text is deleted
 
 ===================================================================================
+<<<<<<< HEAD
 >>>>>>> 199cd2f47 (Adding planned changes for this branch)
 =======
 >>>>>>> 34dc9f69e (Updated date on 1.7.0)
+=======
+>>>>>>> eb136f0d5 (Unreverted date change on 1.7.0 in changelog)
 ## [1.7.0] - 2019-06-03
 
 ### Added
