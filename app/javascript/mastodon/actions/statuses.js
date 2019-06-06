@@ -28,6 +28,9 @@ export const STATUS_UNMUTE_FAIL    = 'STATUS_UNMUTE_FAIL';
 export const STATUS_REVEAL = 'STATUS_REVEAL';
 export const STATUS_HIDE   = 'STATUS_HIDE';
 
+export const STATUS_MEDIA_REVEAL = 'STATUS_MEDIA_REVEAL';
+export const STATUS_MEDIA_HIDE   = 'STATUS_MEDIA_HIDE';
+
 export const REDRAFT = 'REDRAFT';
 
 export function fetchStatusRequest(id, skipLoading) {
@@ -320,4 +323,26 @@ export function revealStatus(ids) {
     type: STATUS_REVEAL,
     ids,
   };
+};
+
+export function revealMedia(ids) {
+  if (!Array.isArray(ids)) {
+    ids = [ids];
+  }
+
+  return {
+    type: STATUS_MEDIA_REVEAL,
+    ids,
+  }
+};
+
+export function hideMedia(ids) {
+  if (!Array.isArray(ids)) {
+    ids = [ids];
+  }
+
+  return {
+    type: STATUS_MEDIA_HIDE,
+    ids,
+  }
 };

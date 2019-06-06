@@ -22,6 +22,8 @@ import {
   deleteStatus,
   hideStatus,
   revealStatus,
+  hideMedia,
+  revealMedia,
 } from '../actions/statuses';
 import { initMuteModal } from '../actions/mutes';
 import { initReport } from '../actions/reports';
@@ -173,11 +175,11 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
     }
   },
 
-  onSetHidden(status, value) {
-    if (!value && status.get('hidden')) {
-      dispatch(revealStatus(status.get('id')));
-    } else if (value && !status.get('hidden')) {
-      dispatch(hideStatus(status.get('id')));
+  onToggleMediaVisibility(status) {
+    if (status.get('media_visible')) {
+      dispatch(hideMedia(status.get('id')));
+    } else if (!status.get('media_visible')) {
+      dispatch(revealMedia(status.get('id')));
     }
   }
 

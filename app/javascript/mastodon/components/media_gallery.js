@@ -244,7 +244,8 @@ class MediaGallery extends React.PureComponent {
     intl: PropTypes.object.isRequired,
     defaultWidth: PropTypes.number,
     cacheWidth: PropTypes.func,
-    onShowSensitiveMedia: PropTypes.func
+    onToggleMediaVisibility: PropTypes.func,
+    mediaVisible: PropTypes.bool.isRequired
   };
 
   static defaultProps = {
@@ -252,21 +253,17 @@ class MediaGallery extends React.PureComponent {
   };
 
   state = {
-    visible: displayMedia !== 'hide_all' && !this.props.sensitive || displayMedia === 'show_all',
+    // REMOVE
+    //visible: displayMedia !== 'hide_all' && !this.props.sensitive || displayMedia === 'show_all',
     width: this.props.defaultWidth,
   };
 
-  componentWillReceiveProps (nextProps) {
-    if (!is(nextProps.media, this.props.media)) {
-      this.setState({ visible: !nextProps.sensitive });
-    }
-  }
-
-  handleOpen = () => {
-    const newVisibility = !this.state.visible;
-    this.setState({ visible: newVisibility });
-    this.props.onSetMediaVisible(newVisibility);
-  }
+  // REMOVE
+  //componentWillReceiveProps (nextProps) {
+  //  if (!is(nextProps.media, this.props.media)) {
+  //    this.setState({ visible: !nextProps.sensitive });
+  //  }
+  //}
 
   handleClick = (index) => {
     this.props.onOpenMedia(this.props.media, index);
@@ -289,8 +286,7 @@ class MediaGallery extends React.PureComponent {
   }
 
   render () {
-    const { media, intl, sensitive, height, defaultWidth } = this.props;
-    const { visible } = this.state;
+    const { media, intl, sensitive, height, defaultWidth, visible } = this.props;
 
     const width = this.state.width || defaultWidth;
 
@@ -317,10 +313,10 @@ class MediaGallery extends React.PureComponent {
     }
 
     if (visible) {
-      spoilerButton = <IconButton title={intl.formatMessage(messages.toggle_visible)} icon='eye-slash' overlay onClick={this.handleOpen} />;
+      spoilerButton = <IconButton title={intl.formatMessage(messages.toggle_visible)} icon='eye-slash' overlay onClick={this.props.onToggleMediaVisibility} />;
     } else {
       spoilerButton = (
-        <button type='button' onClick={this.handleOpen} className='spoiler-button__overlay'>
+        <button type='button' onClick={this.props.onToggleMediaVisibility} className='spoiler-button__overlay'>
           <span className='spoiler-button__overlay__label'>{sensitive ? <FormattedMessage id='status.sensitive_warning' defaultMessage='Sensitive content' /> : <FormattedMessage id='status.media_hidden' defaultMessage='Media hidden' />}</span>
         </button>
       );
