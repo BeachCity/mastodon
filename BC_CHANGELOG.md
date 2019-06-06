@@ -15,7 +15,7 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 - Fixed reply behavior for CWs
 
 ===================================================================================
-## [1.7.0] - 2019-??-??
+## [1.7.0] - 2019-06-03
 
 ### Added
 - Added option to keep CW input open all the time
