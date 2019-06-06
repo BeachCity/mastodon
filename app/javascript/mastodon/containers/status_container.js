@@ -175,11 +175,11 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
     }
   },
 
-  onToggleMediaVisibility(status) {
-    if (status.get('media_visible')) {
-      dispatch(hideMedia(status.get('id')));
-    } else if (!status.get('media_visible')) {
+  onToggleMediaHidden(status) {
+    if (status.get('media_hidden')) {
       dispatch(revealMedia(status.get('id')));
+    } else if (!status.get('media_hidden')) {
+      dispatch(hideMedia(status.get('id')));
     }
   }
 

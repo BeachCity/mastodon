@@ -69,7 +69,8 @@ export default function statuses(state = initialState, action) {
       return state.withMutations(map => {
         action.ids.forEach(id => {
           if (!(state.get(id) === undefined)) {
-            map.setIn([id, 'media_visible'], true);
+            map.setIn([id, 'media_hidden'], false);
+            map.setIn([id, 'hidden'], false);
           }
         });
       });
@@ -77,7 +78,7 @@ export default function statuses(state = initialState, action) {
       return state.withMutations(map => {
         action.ids.forEach(id => {
           if (!(state.get(id) === undefined)) {
-            map.setIn([id, 'media_visible'], false);
+            map.setIn([id, 'media_hidden'], true);
           }
         });
       });
