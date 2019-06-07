@@ -8,7 +8,6 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 - You can now mark yourself as a bot without being treated as a source of potentially automated and unmonitored content
 
 ### Fixed
-- Local only toots do not appear in the federated timeline
 - CW field no longer vanishes in certain conditions when always CW option is on
 - Image sensitivity can be changed when always CW option is on and text is deleted
 
