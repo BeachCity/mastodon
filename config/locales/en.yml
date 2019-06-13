@@ -1019,9 +1019,6 @@ en:
     default: Beach City
     mastodon-light: Mastodon (Light)
     mastodon-dark: Mastodon (Dark)
-    beachcity-single: Beach City Simplified
-    mastodon-light-single: Mastodon (Light) Simplified
-    mastodon-dark-single: Mastodon (Dark) Simplified
   time:
     formats:
       default: "%b %d, %Y, %H:%M"
