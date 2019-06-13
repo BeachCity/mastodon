@@ -505,6 +505,8 @@ en:
     animations_and_accessibility: Animations and accessibility
     confirmation_dialogs: Confirmation dialogs
     sensitive_content: Sensitive content
+    mods: Beach City Enhancements
+    mods_hint: 'Beach City has implemented various modifications/improvements over vanilla Mastodon. Enable them here!'
   application_mailer:
     notification_preferences: Change e-mail preferences
     salutation: "%{name},"
