@@ -9,6 +9,7 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 
 ### Changed
 - Opening sensitive image will open CWs
+- Updated to Mastodon Vanilla 2.9.0rc2
 
 ### Fixed
 - CW field no longer vanishes in certain conditions when always CW option is on
