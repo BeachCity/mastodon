@@ -244,8 +244,8 @@ class MediaGallery extends React.PureComponent {
     intl: PropTypes.object.isRequired,
     defaultWidth: PropTypes.number,
     cacheWidth: PropTypes.func,
-    onToggleMediaHidden: PropTypes.func,
-    visible: PropTypes.bool.isRequired
+    visible: PropTypes.bool,
+    onToggleVisibility: PropTypes.func,
   };
 
   static defaultProps = {
@@ -253,22 +253,29 @@ class MediaGallery extends React.PureComponent {
   };
 
   state = {
-    localVisible: displayMedia !== 'hide_all' && !this.props.sensitive || displayMedia === 'show_all',
+    visible: this.props.visible !== undefined ? this.props.visible : (displayMedia !== 'hide_all' && !this.props.sensitive || displayMedia === 'show_all'),
     width: this.props.defaultWidth,
   };
+
+  componentWillReceiveProps (nextProps) {
+    if (!is(nextProps.media, this.props.media) && nextProps.visible === undefined) {
+      this.setState({ visible: displayMedia !== 'hide_all' && !nextProps.sensitive || displayMedia === 'show_all' });
+    } else if (!is(nextProps.visible, this.props.visible) && nextProps.visible !== undefined) {
+      this.setState({ visible: nextProps.visible });
+    }
+  }
+
+  handleOpen = () => {
+    if (this.props.onToggleVisibility) {
+      this.props.onToggleVisibility();
+    } else {
+      this.setState({ visible: !this.state.visible });
+    }
+  }
 
   handleClick = (index) => {
     this.props.onOpenMedia(this.props.media, index);
   }
-
-  handleMediaClick = (index) => {
-    if (this.props.onToggleMediaHidden) {
-      // The parent manages the state
-      this.props.onToggleMediaHidden();
-    } else {
-      this.setState({localVisible: !this.state.localVisible});
-    }
-  };
 
   handleRef = (node) => {
     if (node /*&& this.isStandaloneEligible()*/) {
@@ -287,10 +294,8 @@ class MediaGallery extends React.PureComponent {
   }
 
   render () {
-    const { media, intl, sensitive, height, defaultWidth, visible } = this.props;
-    const { localVisible } = this.state;
-
-    const actuallyVisible = this.props.onToggleMediaHidden ? visible : localVisible;
+    const { media, intl, sensitive, height, defaultWidth } = this.props;
+    const { visible } = this.state;
 
     const width = this.state.width || defaultWidth;
 
@@ -311,16 +316,16 @@ class MediaGallery extends React.PureComponent {
     const size = media.take(4).size;
 
     if (this.isStandaloneEligible()) {
-      children = <Item standalone onClick={this.handleClick} attachment={media.get(0)} displayWidth={width} visible={actuallyVisible} />;
+      children = <Item standalone onClick={this.handleClick} attachment={media.get(0)} displayWidth={width} visible={visible} />;
     } else {
-      children = media.take(4).map((attachment, i) => <Item key={attachment.get('id')} onClick={this.handleClick} attachment={attachment} index={i} size={size} displayWidth={width} visible={actuallyVisible} />);
+      children = media.take(4).map((attachment, i) => <Item key={attachment.get('id')} onClick={this.handleClick} attachment={attachment} index={i} size={size} displayWidth={width} visible={visible} />);
     }
 
-    if (actuallyVisible) {
-      spoilerButton = <IconButton title={intl.formatMessage(messages.toggle_visible)} icon='eye-slash' overlay onClick={this.handleMediaClick} />;
+    if (visible) {
+      spoilerButton = <IconButton title={intl.formatMessage(messages.toggle_visible)} icon='eye-slash' overlay onClick={this.handleOpen} />;
     } else {
       spoilerButton = (
-        <button type='button' onClick={this.handleMediaClick} className='spoiler-button__overlay'>
+        <button type='button' onClick={this.handleOpen} className='spoiler-button__overlay'>
           <span className='spoiler-button__overlay__label'>{sensitive ? <FormattedMessage id='status.sensitive_warning' defaultMessage='Sensitive content' /> : <FormattedMessage id='status.media_hidden' defaultMessage='Media hidden' />}</span>
         </button>
       );
@@ -328,7 +333,7 @@ class MediaGallery extends React.PureComponent {
 
     return (
       <div className='media-gallery' style={style} ref={this.handleRef}>
-        <div className={classNames('spoiler-button', { 'spoiler-button--minified': actuallyVisible })}>
+        <div className={classNames('spoiler-button', { 'spoiler-button--minified': visible })}>
           {spoilerButton}
         </div>
 
