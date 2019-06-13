@@ -76,7 +76,6 @@ class Status extends ImmutablePureComponent {
     onEmbed: PropTypes.func,
     onHeightChange: PropTypes.func,
     onToggleHidden: PropTypes.func,
-    onToggleMediaHidden: PropTypes.func,
     muted: PropTypes.bool,
     hidden: PropTypes.bool,
     unread: PropTypes.bool,
@@ -154,6 +153,10 @@ class Status extends ImmutablePureComponent {
   }
 
   handleToggleMediaVisibility = () => {
+    const status = this._properStatus();
+    if (!this.state.showMedia && status.get('hidden')) {
+      this.props.onToggleHidden(status);
+    }
     this.setState({ showMedia: !this.state.showMedia });
   }
 
@@ -197,10 +200,6 @@ class Status extends ImmutablePureComponent {
 
   handleExpandedToggle = () => {
     this.props.onToggleHidden(this._properStatus());
-  };
-
-  handleToggleMediaHidden = () => {
-    this.props.onToggleMediaHidden(this._properStatus());
   };
 
   renderLoadingMediaGallery () {
@@ -369,8 +368,6 @@ class Status extends ImmutablePureComponent {
                 media={status.get('media_attachments')}
                 sensitive={status.get('sensitive')}
                 height={110}
-                visible={!status.get('media_hidden')}
-                onToggleMediaHidden={this.handleToggleMediaHidden}
                 onOpenMedia={this.props.onOpenMedia}
                 cacheWidth={this.props.cacheMediaWidth}
                 defaultWidth={this.props.cachedMediaWidth}
