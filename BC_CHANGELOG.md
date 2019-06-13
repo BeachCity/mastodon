@@ -1,19 +1,17 @@
 Changelog
 =========
 
-All changes to Beach City beyond the vanilla Mastodon code will be documented here.
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-## [1.7.1] - 2019-??-??
+All changes to Beach City beyond the vanilla Mastodon code will be documented here
 =======
 ## [1.8.0] - 2019-06-??
->>>>>>> e6520f0c7 (With bot changes, this becomes a 1.8.0 release)
 
 ### Added
 - You can now mark yourself as a bot without being treated as a source of potentially automated and unmonitored content
+
+### Changed
+- Opening sensitive image will open CWs
+- Updated to Mastodon Vanilla 2.9.0rc2
+- Given official single column support, our hacked version was removed
 
 ### Fixed
 - Local only toots do not appear in the federated timeline
@@ -21,12 +19,6 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 - Image sensitivity can be changed when always CW option is on and text is deleted
 
 ===================================================================================
-<<<<<<< HEAD
->>>>>>> 199cd2f47 (Adding planned changes for this branch)
-=======
->>>>>>> 34dc9f69e (Updated date on 1.7.0)
-=======
->>>>>>> eb136f0d5 (Unreverted date change on 1.7.0 in changelog)
 ## [1.7.0] - 2019-06-03
 
 ### Added
