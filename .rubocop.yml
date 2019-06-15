@@ -1,6 +1,3 @@
-require:
-  - rubocop-rails
-
 AllCops:
   TargetRubyVersion: 2.3
   Exclude:
@@ -84,9 +81,6 @@ Rails/Exit:
   Exclude:
     - 'lib/mastodon/*'
     - 'lib/cli.rb'
-
-Rails/HelperInstanceVariable:
-  Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false

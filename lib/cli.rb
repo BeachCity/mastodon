@@ -106,7 +106,7 @@ module Mastodon
             [json, account.id, inbox_url]
           end
 
-          account.suspend!
+          account.update_column(:suspended, true)
         end
 
         processed += 1

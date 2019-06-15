@@ -122,7 +122,10 @@
         height: 36px;
         width: auto;
         margin: 0 auto;
-        fill: lighten($ui-base-color, 34%);
+
+        path {
+          fill: lighten($ui-base-color, 34%);
+        }
       }
 
       &:hover,

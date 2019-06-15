@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class SuspendAccountService < BaseService
-  include Payloadable
-
   ASSOCIATIONS_ON_SUSPEND = %w(
     account_pins
     active_relationships
@@ -90,8 +88,8 @@ class SuspendAccountService < BaseService
 
     return if @options[:destroy]
 
-    @account.silenced_at      = nil
-    @account.suspended_at     = @options[:suspended_at] || Time.now.utc
+    @account.silenced         = false
+    @account.suspended        = true
     @account.locked           = false
     @account.display_name     = ''
     @account.note             = ''
@@ -120,11 +118,23 @@ class SuspendAccountService < BaseService
   end
 
   def delete_actor_json
-    @delete_actor_json ||= Oj.dump(serialize_payload(@account, ActivityPub::DeleteActorSerializer, signer: @account))
+    return @delete_actor_json if defined?(@delete_actor_json)
+
+    payload = ActiveModelSerializers::SerializableResource.new(
+      @account,
+      serializer: ActivityPub::DeleteActorSerializer,
+      adapter: ActivityPub::Adapter
+    ).as_json
+
+    @delete_actor_json = Oj.dump(ActivityPub::LinkedDataSignature.new(payload).sign!(@account))
   end
 
   def build_reject_json(follow)
-    Oj.dump(serialize_payload(follow, ActivityPub::RejectFollowSerializer))
+    ActiveModelSerializers::SerializableResource.new(
+      follow,
+      serializer: ActivityPub::RejectFollowSerializer,
+      adapter: ActivityPub::Adapter
+    ).to_json
   end
 
   def delivery_inboxes

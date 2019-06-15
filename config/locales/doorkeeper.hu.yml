@@ -36,6 +36,7 @@ hu:
         scopes: A nézeteket szóközzel válaszd el. Hagyd üresen az alapértelmezett nézetekhez.
       index:
         application: Alkalmazás
+        callback_url: Callback URL
         delete: Eltávolítás
         name: Név
         new: Új alkalmazás
@@ -61,6 +62,8 @@ hu:
         able_to: Képes lesz
         prompt: "%{client_name} nevű alkalmazás engedélyt kér a fiókodhoz való hozzáféréshez."
         title: Engedély szükséges
+      show:
+        title: Copy this authorization code and paste it to the application.
     authorized_applications:
       buttons:
         revoke: Visszavonás
@@ -69,6 +72,7 @@ hu:
       index:
         application: Alkalmazás
         created_at: Készítve
+        date_format: "%Y-%m-%d %H:%M:%S"
         scopes: Hatáskör
         title: Engedélyezett alkalmazásaid
     errors:

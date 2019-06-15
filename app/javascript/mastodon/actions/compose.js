@@ -65,14 +65,6 @@ const messages = defineMessages({
 });
 export const COMPOSE_DOODLE_SET        = 'COMPOSE_DOODLE_SET';
 
-const COMPOSE_PANEL_BREAKPOINT = 600 + (285 * 1) + (10 * 1);
-
-export const ensureComposeIsVisible = (getState, routerHistory) => {
-  if (!getState().getIn(['compose', 'mounted']) && window.innerWidth < COMPOSE_PANEL_BREAKPOINT) {
-    routerHistory.push('/statuses/new');
-  }
-};
-
 export function changeCompose(text) {
   return {
     type: COMPOSE_CHANGE,
@@ -87,7 +79,9 @@ export function replyCompose(status, routerHistory) {
       status: status,
     });
 
-    ensureComposeIsVisible(getState, routerHistory);
+    if (!getState().getIn(['compose', 'mounted'])) {
+      routerHistory.push('/statuses/new');
+    }
   };
 };
 
@@ -110,7 +104,9 @@ export function mentionCompose(account, routerHistory) {
       account: account,
     });
 
-    ensureComposeIsVisible(getState, routerHistory);
+    if (!getState().getIn(['compose', 'mounted'])) {
+      routerHistory.push('/statuses/new');
+    }
   };
 };
 
@@ -121,7 +117,9 @@ export function directCompose(account, routerHistory) {
       account: account,
     });
 
-    ensureComposeIsVisible(getState, routerHistory);
+    if (!getState().getIn(['compose', 'mounted'])) {
+      routerHistory.push('/statuses/new');
+    }
   };
 };
 
@@ -395,7 +393,7 @@ export function readyComposeSuggestionsAccounts(token, accounts) {
   };
 };
 
-export function selectComposeSuggestion(position, token, suggestion, path) {
+export function selectComposeSuggestion(position, token, suggestion) {
   return (dispatch, getState) => {
     let completion, startPosition;
 
@@ -417,7 +415,6 @@ export function selectComposeSuggestion(position, token, suggestion, path) {
       position: startPosition,
       token,
       completion,
-      path,
     });
   };
 };

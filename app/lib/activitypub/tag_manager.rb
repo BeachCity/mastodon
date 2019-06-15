@@ -65,14 +65,7 @@ class ActivityPub::TagManager
     when 'unlisted', 'private'
       [account_followers_url(status.account)]
     when 'direct', 'limited'
-      if status.account.silenced?
-        # Only notify followers if the account is locally silenced
-        account_ids = status.active_mentions.pluck(:account_id)
-        to = status.account.followers.where(id: account_ids).map { |account| uri_for(account) }
-        to.concat(FollowRequest.where(target_account_id: status.account_id, account_id: account_ids).map { |request| uri_for(request.account) })
-      else
-        status.active_mentions.map { |mention| uri_for(mention.account) }
-      end
+      status.active_mentions.map { |mention| uri_for(mention.account) }
     end
   end
 
@@ -93,16 +86,7 @@ class ActivityPub::TagManager
       cc << COLLECTIONS[:public]
     end
 
-    unless status.direct_visibility? || status.limited_visibility?
-      if status.account.silenced?
-        # Only notify followers if the account is locally silenced
-        account_ids = status.active_mentions.pluck(:account_id)
-        cc.concat(status.account.followers.where(id: account_ids).map { |account| uri_for(account) })
-        cc.concat(FollowRequest.where(target_account_id: status.account_id, account_id: account_ids).map { |request| uri_for(request.account) })
-      else
-        cc.concat(status.active_mentions.map { |mention| uri_for(mention.account) })
-      end
-    end
+    cc.concat(status.active_mentions.map { |mention| uri_for(mention.account) }) unless status.direct_visibility? || status.limited_visibility?
 
     cc
   end

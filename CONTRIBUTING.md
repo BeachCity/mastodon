@@ -18,7 +18,9 @@ Bug reports and feature suggestions can be submitted to [GitHub Issues](https://
 
 ## Translations
 
-You can submit translations via pull request.
+You can submit translations via [Weblate](https://weblate.joinmastodon.org/). They are periodically merged into the codebase.
+
+[![Mastodon translation statistics by language](https://weblate.joinmastodon.org/widgets/mastodon/-/multi-auto.svg)](https://weblate.joinmastodon.org/)
 
 ## Pull requests
 

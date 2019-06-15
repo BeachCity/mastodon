@@ -87,22 +87,13 @@ Rails.application.routes.draw do
   get '/explore', to: 'directories#index', as: :explore
   get '/explore/:id', to: 'directories#show', as: :explore_hashtag
 
-  get '/settings', to: redirect('/settings/profile')
-
   namespace :settings do
     resource :profile, only: [:show, :update]
-
-    get :preferences, to: redirect('/settings/preferences/appearance')
-
-    namespace :preferences do
-      resource :appearance, only: [:show, :update], controller: :appearance
-      resource :notifications, only: [:show, :update]
-      resource :other, only: [:show, :update], controller: :other
-    end
-
+    resource :preferences, only: [:show, :update]
+    resource :notifications, only: [:show, :update]
     resource :import, only: [:show, :create]
-    resource :export, only: [:show, :create]
 
+    resource :export, only: [:show, :create]
     namespace :exports, constraints: { format: :csv } do
       resources :follows, only: :index, controller: :following_accounts
       resources :blocks, only: :index, controller: :blocked_accounts
@@ -112,7 +103,6 @@ Rails.application.routes.draw do
     end
 
     resource :two_factor_authentication, only: [:show, :create, :destroy]
-
     namespace :two_factor_authentication do
       resources :recovery_codes, only: [:create]
       resource :confirmation, only: [:new, :create]

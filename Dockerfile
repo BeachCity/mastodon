@@ -7,6 +7,7 @@ SHELL ["bash", "-c"]
 ENV NODE_VER="8.15.0"
 RUN	echo "Etc/UTC" > /etc/localtime && \
 	apt update && \
+	apt -y dist-upgrade && \
 	apt -y install wget make gcc g++ python && \
 	cd ~ && \
 	wget https://nodejs.org/download/release/v$NODE_VER/node-v$NODE_VER.tar.gz && \
@@ -79,12 +80,13 @@ ARG GID=991
 RUN apt update && \
 	echo "Etc/UTC" > /etc/localtime && \
 	ln -s /opt/jemalloc/lib/* /usr/lib/ && \
+	apt -y dist-upgrade && \
 	apt install -y whois wget && \
 	addgroup --gid $GID mastodon && \
 	useradd -m -u $UID -g $GID -d /opt/mastodon mastodon && \
 	echo "mastodon:`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 | mkpasswd -s -m sha-256`" | chpasswd
 
-# Install mastodon runtime deps
+# Install masto runtime deps
 RUN apt -y --no-install-recommends install \
 	  libssl1.1 libpq5 imagemagick ffmpeg \
 	  libicu60 libprotobuf10 libidn11 libyaml-0-2 \
@@ -93,7 +95,7 @@ RUN apt -y --no-install-recommends install \
 	ln -s /opt/mastodon /mastodon && \
 	gem install bundler && \
 	rm -rf /var/cache && \
-	rm -rf /var/lib/apt/lists/*
+	rm -rf /var/lib/apt
 
 # Add tini
 ENV TINI_VERSION="0.18.0"
@@ -102,11 +104,11 @@ ADD https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini /tin
 RUN echo "$TINI_SUM tini" | sha256sum -c -
 RUN chmod +x /tini
 
-# Copy over mastodon source, and dependencies from building, and set permissions
+# Copy over masto source, and dependencies from building, and set permissions
 COPY --chown=mastodon:mastodon . /opt/mastodon
 COPY --from=build-dep --chown=mastodon:mastodon /opt/mastodon /opt/mastodon
 
-# Run mastodon services in prod mode
+# Run masto services in prod mode
 ENV RAILS_ENV="production"
 ENV NODE_ENV="production"
 

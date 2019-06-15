@@ -3,7 +3,6 @@
 class RemoveStatusService < BaseService
   include StreamEntryRenderer
   include Redisable
-  include Payloadable
 
   def call(status, **options)
     @payload      = Oj.dump(event: :delete, payload: status.id.to_s)
@@ -116,7 +115,15 @@ class RemoveStatusService < BaseService
   end
 
   def signed_activity_json
-    @signed_activity_json ||= Oj.dump(serialize_payload(@status, @status.reblog? ? ActivityPub::UndoAnnounceSerializer : ActivityPub::DeleteSerializer, signer: @account))
+    @signed_activity_json ||= Oj.dump(ActivityPub::LinkedDataSignature.new(activity_json).sign!(@account))
+  end
+
+  def activity_json
+    @activity_json ||= ActiveModelSerializers::SerializableResource.new(
+      @status,
+      serializer: @status.reblog? ? ActivityPub::UndoAnnounceSerializer : ActivityPub::DeleteSerializer,
+      adapter: ActivityPub::Adapter
+    ).as_json
   end
 
   def remove_reblogs

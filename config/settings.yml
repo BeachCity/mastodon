@@ -32,7 +32,6 @@ defaults: &defaults
   noindex: true
   theme: 'default'
   aggregate_reblogs: true
-  advanced_layout: false
   notification_emails:
     follow: false
     reblog: false

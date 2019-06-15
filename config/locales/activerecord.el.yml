@@ -5,6 +5,8 @@ el:
       poll:
         expires_at: Προθεσμία
         options: Επιλογές
+      status:
+        owned_poll: Ψηφοφορία
     errors:
       models:
         account:

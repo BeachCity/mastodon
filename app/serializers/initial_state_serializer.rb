@@ -34,7 +34,6 @@ class InitialStateSerializer < ActiveModel::Serializer
       store[:enable_doodle]   = object.current_account.user.setting_enable_doodle
       store[:enable_federation_dropdown] = object.current_account.user.setting_enable_federation_dropdown
       store[:enable_always_show_spoiler] = object.current_account.user.setting_enable_always_show_spoiler
-      store[:advanced_layout] = object.current_account.user.setting_advanced_layout
       store[:is_staff]        = object.current_account.user.staff?
     end
 

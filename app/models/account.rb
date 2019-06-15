@@ -28,6 +28,8 @@
 #  header_updated_at       :datetime
 #  avatar_remote_url       :string
 #  subscription_expires_at :datetime
+#  silenced                :boolean          default(FALSE), not null
+#  suspended               :boolean          default(FALSE), not null
 #  locked                  :boolean          default(FALSE), not null
 #  header_remote_url       :string           default(""), not null
 #  last_webfingered_at     :datetime
@@ -43,9 +45,6 @@
 #  actor_type              :string
 #  discoverable            :boolean
 #  also_known_as           :string           is an Array
-#  bot_identified          :boolean
-#  silenced_at             :datetime
-#  suspended_at            :datetime
 #
 
 class Account < ApplicationRecord
@@ -83,10 +82,10 @@ class Account < ApplicationRecord
   scope :local, -> { where(domain: nil) }
   scope :expiring, ->(time) { remote.where.not(subscription_expires_at: nil).where('subscription_expires_at < ?', time) }
   scope :partitioned, -> { order(Arel.sql('row_number() over (partition by domain)')) }
-  scope :silenced, -> { where.not(silenced_at: nil) }
-  scope :suspended, -> { where.not(suspended_at: nil) }
-  scope :without_suspended, -> { where(suspended_at: nil) }
-  scope :without_silenced, -> { where(silenced_at: nil) }
+  scope :silenced, -> { where(silenced: true) }
+  scope :suspended, -> { where(suspended: true) }
+  scope :without_suspended, -> { where(suspended: false) }
+  scope :without_silenced, -> { where(silenced: false) }
   scope :recent, -> { reorder(id: :desc) }
   scope :bots, -> { where(actor_type: %w(Application Service)) }
   scope :alphabetic, -> { order(domain: :asc, username: :asc) }
@@ -166,35 +165,25 @@ class Account < ApplicationRecord
     ResolveAccountService.new.call(acct)
   end
 
-  def silenced?
-    silenced_at.present?
-  end
-
-  def silence!(date = nil)
-    date ||= Time.now.utc
-    update!(silenced_at: date)
+  def silence!
+    update!(silenced: true)
   end
 
   def unsilence!
-    update!(silenced_at: nil)
+    update!(silenced: false)
   end
 
-  def suspended?
-    suspended_at.present?
-  end
-
-  def suspend!(date = nil)
-    date ||= Time.now.utc
+  def suspend!
     transaction do
       user&.disable! if local?
-      update!(suspended_at: date)
+      update!(suspended: true)
     end
   end
 
   def unsuspend!
     transaction do
       user&.enable! if local?
-      update!(suspended_at: nil)
+      update!(suspended: false)
     end
   end
 
@@ -203,10 +192,6 @@ class Account < ApplicationRecord
       user&.disable! if local?
       update!(memorial: true)
     end
-  end
-
-  def sign?
-    true
   end
 
   def keypair
@@ -414,7 +399,7 @@ class Account < ApplicationRecord
           ts_rank_cd(#{textsearch}, #{query}, 32) AS rank
         FROM accounts
         WHERE #{query} @@ #{textsearch}
-          AND accounts.suspended_at IS NULL
+          AND accounts.suspended = false
           AND accounts.moved_to_account_id IS NULL
         ORDER BY rank DESC
         LIMIT ? OFFSET ?
@@ -442,7 +427,7 @@ class Account < ApplicationRecord
           LEFT OUTER JOIN follows AS f ON (accounts.id = f.account_id AND f.target_account_id = ?) OR (accounts.id = f.target_account_id AND f.account_id = ?)
           WHERE accounts.id IN (SELECT * FROM first_degree)
             AND #{query} @@ #{textsearch}
-            AND accounts.suspended_at IS NULL
+            AND accounts.suspended = false
             AND accounts.moved_to_account_id IS NULL
           GROUP BY accounts.id
           ORDER BY rank DESC
@@ -458,7 +443,7 @@ class Account < ApplicationRecord
           FROM accounts
           LEFT OUTER JOIN follows AS f ON (accounts.id = f.account_id AND f.target_account_id = ?) OR (accounts.id = f.target_account_id AND f.account_id = ?)
           WHERE #{query} @@ #{textsearch}
-            AND accounts.suspended_at IS NULL
+            AND accounts.suspended = false
             AND accounts.moved_to_account_id IS NULL
           GROUP BY accounts.id
           ORDER BY rank DESC

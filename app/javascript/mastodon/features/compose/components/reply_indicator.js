@@ -7,7 +7,6 @@ import DisplayName from '../../../components/display_name';
 import { defineMessages, injectIntl } from 'react-intl';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 import { isRtl } from '../../../rtl';
-import AttachmentList from 'mastodon/components/attachment_list';
 
 const messages = defineMessages({
   cancel: { id: 'reply_indicator.cancel', defaultMessage: 'Cancel' },
@@ -61,13 +60,6 @@ class ReplyIndicator extends ImmutablePureComponent {
         </div>
 
         <div className='reply-indicator__content' style={style} dangerouslySetInnerHTML={content} />
-
-        {status.get('media_attachments').size > 0 && (
-          <AttachmentList
-            compact
-            media={status.get('media_attachments')}
-          />
-        )}
       </div>
     );
   }

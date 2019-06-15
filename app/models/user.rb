@@ -88,7 +88,7 @@ class User < ApplicationRecord
   scope :confirmed, -> { where.not(confirmed_at: nil) }
   scope :enabled, -> { where(disabled: false) }
   scope :inactive, -> { where(arel_table[:current_sign_in_at].lt(ACTIVE_DURATION.ago)) }
-  scope :active, -> { confirmed.where(arel_table[:current_sign_in_at].gteq(ACTIVE_DURATION.ago)).joins(:account).where.not(accounts: { suspended_at: nil }) }
+  scope :active, -> { confirmed.where(arel_table[:current_sign_in_at].gteq(ACTIVE_DURATION.ago)).joins(:account).where(accounts: { suspended: false }) }
   scope :matches_email, ->(value) { where(arel_table[:email].matches("#{value}%")) }
   scope :emailable, -> { confirmed.enabled.joins(:account).merge(Account.searchable) }
 
@@ -105,8 +105,8 @@ class User < ApplicationRecord
   delegate :auto_play_gif, :default_sensitive, :unfollow_modal, :boost_modal, :delete_modal,
            :reduce_motion, :system_font_ui, :noindex, :theme, :display_media, :hide_network,
            :expand_spoilers, :default_language, :aggregate_reblogs, :show_application,
-           :enable_doodle, :enable_federation_dropdown, :enable_always_show_spoiler, :default_federation,
-           :advanced_layout, to: :settings, prefix: :setting, allow_nil: false
+           :enable_doodle, :enable_federation_dropdown, :enable_always_show_spoiler,
+           :default_federation, to: :settings, prefix: :setting, allow_nil: false
 
   attr_reader :invite_code
   attr_writer :external
@@ -116,7 +116,6 @@ class User < ApplicationRecord
   end
 
   def invited?
-    invite_id.present?
   end
 
   def valid_invitation?

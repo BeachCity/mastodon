@@ -37,7 +37,6 @@ class UserSettingsDecorator
     user.settings['enable_doodle']       = enable_doodle_preference if change?('setting_enable_doodle')
     user.settings['enable_federation_dropdown']   = enable_federation_dropdown_preference if change?('setting_enable_federation_dropdown')
     user.settings['enable_always_show_spoiler'] = enable_always_show_spoiler_preference if change?('setting_enable_always_show_spoiler')
-    user.settings['advanced_layout']     = advanced_layout_preference if change?('setting_advanced_layout')
   end
 
   def merged_notification_emails
@@ -126,10 +125,6 @@ class UserSettingsDecorator
 
   def aggregate_reblogs_preference
     boolean_cast_setting 'setting_aggregate_reblogs'
-  end
-
-  def advanced_layout_preference
-    boolean_cast_setting 'setting_advanced_layout'
   end
 
   def boolean_cast_setting(key)

@@ -55,8 +55,7 @@ export default class AutosuggestTextarea extends ImmutablePureComponent {
   };
 
   state = {
-    suggestionsHidden: true,
-    focused: false,
+    suggestionsHidden: false,
     selectedSuggestion: 0,
     lastToken: null,
     tokenStart: 0,
@@ -135,14 +134,7 @@ export default class AutosuggestTextarea extends ImmutablePureComponent {
   }
 
   onBlur = () => {
-    this.setState({ suggestionsHidden: true, focused: false });
-  }
-
-  onFocus = (e) => {
-    this.setState({ focused: true });
-    if (this.props.onFocus) {
-      this.props.onFocus(e);
-    }
+    this.setState({ suggestionsHidden: true });
   }
 
   onSuggestionClick = (e) => {
@@ -153,7 +145,7 @@ export default class AutosuggestTextarea extends ImmutablePureComponent {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.suggestions !== this.props.suggestions && nextProps.suggestions.size > 0 && this.state.suggestionsHidden && this.state.focused) {
+    if (nextProps.suggestions !== this.props.suggestions && nextProps.suggestions.size > 0 && this.state.suggestionsHidden) {
       this.setState({ suggestionsHidden: false });
     }
   }
@@ -192,7 +184,7 @@ export default class AutosuggestTextarea extends ImmutablePureComponent {
   }
 
   render () {
-    const { value, suggestions, disabled, placeholder, onKeyUp, autoFocus, children } = this.props;
+    const { value, suggestions, disabled, placeholder, onKeyUp, autoFocus } = this.props;
     const { suggestionsHidden } = this.state;
     const style = { direction: 'ltr' };
 
@@ -200,39 +192,33 @@ export default class AutosuggestTextarea extends ImmutablePureComponent {
       style.direction = 'rtl';
     }
 
-    return [
-      <div className='compose-form__autosuggest-wrapper' key='autosuggest-wrapper'>
-        <div className='autosuggest-textarea'>
-          <label>
-            <span style={{ display: 'none' }}>{placeholder}</span>
+    return (
+      <div className='autosuggest-textarea'>
+        <label>
+          <span style={{ display: 'none' }}>{placeholder}</span>
 
-            <Textarea
-              inputRef={this.setTextarea}
-              className='autosuggest-textarea__textarea'
-              disabled={disabled}
-              placeholder={placeholder}
-              autoFocus={autoFocus}
-              value={value}
-              onChange={this.onChange}
-              onKeyDown={this.onKeyDown}
-              onKeyUp={onKeyUp}
-              onFocus={this.onFocus}
-              onBlur={this.onBlur}
-              onPaste={this.onPaste}
-              style={style}
-              aria-autocomplete='list'
-            />
-          </label>
-        </div>
-        {children}
-      </div>,
+          <Textarea
+            inputRef={this.setTextarea}
+            className='autosuggest-textarea__textarea'
+            disabled={disabled}
+            placeholder={placeholder}
+            autoFocus={autoFocus}
+            value={value}
+            onChange={this.onChange}
+            onKeyDown={this.onKeyDown}
+            onKeyUp={onKeyUp}
+            onBlur={this.onBlur}
+            onPaste={this.onPaste}
+            style={style}
+            aria-autocomplete='list'
+          />
+        </label>
 
-      <div className='autosuggest-textarea__suggestions-wrapper' key='suggestions-wrapper'>
         <div className={`autosuggest-textarea__suggestions ${suggestionsHidden || suggestions.isEmpty() ? '' : 'autosuggest-textarea__suggestions--visible'}`}>
           {suggestions.map(this.renderSuggestion)}
         </div>
-      </div>,
-    ];
+      </div>
+    );
   }
 
 }

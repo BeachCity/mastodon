@@ -7,7 +7,7 @@ const redis = require('redis');
 const pg = require('pg');
 const log = require('npmlog');
 const url = require('url');
-const { WebSocketServer } = require('@clusterws/cws');
+const WebSocket = require('uws');
 const uuid = require('uuid');
 const fs = require('fs');
 
@@ -578,12 +578,19 @@ const startWorker = (workerId) => {
     });
   });
 
-  const wss = new WebSocketServer({ server, verifyClient: wsVerifyClient });
+  const wss = new WebSocket.Server({ server, verifyClient: wsVerifyClient });
 
-  wss.on('connection', (ws, req) => {
+  wss.on('connection', ws => {
+    const req      = ws.upgradeReq;
     const location = url.parse(req.url, true);
     req.requestId  = uuid.v4();
     req.remoteAddress = ws._socket.remoteAddress;
+
+    ws.isAlive = true;
+
+    ws.on('pong', () => {
+      ws.isAlive = true;
+    });
 
     let channel;
 
@@ -645,7 +652,17 @@ const startWorker = (workerId) => {
     }
   });
 
-  wss.startAutoPing(30000);
+  setInterval(() => {
+    wss.clients.forEach(ws => {
+      if (ws.isAlive === false) {
+        ws.terminate();
+        return;
+      }
+
+      ws.isAlive = false;
+      ws.ping('', false, true);
+    });
+  }, 30000);
 
   attachServerWithConfig(server, address => {
     log.info(`Worker ${workerId} now listening on ${address}`);

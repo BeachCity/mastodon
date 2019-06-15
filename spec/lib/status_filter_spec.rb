@@ -15,7 +15,7 @@ describe StatusFilter do
 
       context 'when status account is silenced' do
         before do
-          status.account.silence!
+          status.account.update(silenced: true)
         end
 
         it { is_expected.to be_filtered }
@@ -65,7 +65,7 @@ describe StatusFilter do
 
       context 'when status account is silenced' do
         before do
-          status.account.silence!
+          status.account.update(silenced: true)
         end
 
         it { is_expected.to be_filtered }

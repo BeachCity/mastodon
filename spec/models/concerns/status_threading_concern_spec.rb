@@ -35,7 +35,7 @@ describe StatusThreadingConcern do
     end
 
     it 'does not return conversation history from silenced and not followed users' do
-      jeff.silence!
+      jeff.update(silenced: true)
       expect(reply3.ancestors(4, viewer)).to_not include(reply1)
     end
 
@@ -110,7 +110,7 @@ describe StatusThreadingConcern do
     end
 
     it 'does not return replies from silenced and not followed users' do
-      jeff.silence!
+      jeff.update(silenced: true)
       expect(status.descendants(4, viewer)).to_not include(reply3)
     end
 

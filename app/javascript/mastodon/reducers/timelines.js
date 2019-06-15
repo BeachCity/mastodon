@@ -35,11 +35,13 @@ const expandNormalizedTimeline = (state, timeline, statuses, next, isPartial, is
 
     if (!next && !isLoadingRecent) mMap.set('hasMore', false);
 
-    if (timeline.endsWith(':pinned')) {
-      mMap.set('items', statuses.map(status => status.get('id')));
-    } else if (!statuses.isEmpty()) {
+    if (!statuses.isEmpty()) {
       mMap.update('items', ImmutableList(), oldIds => {
         const newIds = statuses.map(status => status.get('id'));
+
+        if (timeline.indexOf(':pinned') !== -1) {
+          return newIds;
+        }
 
         const lastIndex = oldIds.findLastIndex(id => id !== null && compareId(id, newIds.last()) >= 0) + 1;
         const firstIndex = oldIds.take(lastIndex).findLastIndex(id => id !== null && compareId(id, newIds.first()) > 0);

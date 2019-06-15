@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ReportService < BaseService
-  include Payloadable
-
   def call(source_account, target_account, options = {})
     @source_account = source_account
     @target_account = target_account
@@ -46,7 +44,12 @@ class ReportService < BaseService
   end
 
   def payload
-    Oj.dump(serialize_payload(@report, ActivityPub::FlagSerializer, account: some_local_account))
+    Oj.dump(ActiveModelSerializers::SerializableResource.new(
+      @report,
+      serializer: ActivityPub::FlagSerializer,
+      adapter: ActivityPub::Adapter,
+      account: some_local_account
+    ).as_json)
   end
 
   def some_local_account

@@ -128,7 +128,9 @@ function appendMedia(state, media) {
     map.set('resetFileKey', Math.floor((Math.random() * 0x10000)));
     map.set('idempotencyKey', uuid());
 
-    if (prevSize === 0 && (state.get('default_sensitive') || isSpoilerActive(state))) {
+    const isSpoilerActive = enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler');
+
+    if (prevSize === 0 && (state.get('default_sensitive') || isSpoilerActive)) {
       map.set('sensitive', true);
     }
   });
@@ -147,19 +149,13 @@ function removeMedia(state, mediaId) {
   });
 };
 
-function isSpoilerActive(state) {
-  return enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler')
-};
-
-const insertSuggestion = (state, position, token, completion, path) => {
+const insertSuggestion = (state, position, token, completion) => {
   return state.withMutations(map => {
-    map.updateIn(path, oldText => `${oldText.slice(0, position)}${completion} ${oldText.slice(position + token.length)}`);
+    map.update('text', oldText => `${oldText.slice(0, position)}${completion} ${oldText.slice(position + token.length)}`);
     map.set('suggestion_token', null);
-    map.set('suggestions', ImmutableList());
-    if (path.length === 1 && path[0] === 'text') {
-      map.set('focusDate', new Date());
-      map.set('caretPosition', position + completion.length + 1);
-    }
+    map.update('suggestions', ImmutableList(), list => list.clear());
+    map.set('focusDate', new Date());
+    map.set('caretPosition', position + completion.length + 1);
     map.set('idempotencyKey', uuid());
   });
 };
@@ -227,7 +223,8 @@ export default function compose(state = initialState, action) {
       .set('is_composing', false);
   case COMPOSE_SENSITIVITY_CHANGE:
     return state.withMutations(map => {
-      if (!isSpoilerActive(state)) {
+      const isSpoilerActive = enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler');
+      if (!isSpoilerActive) {
         map.set('sensitive', !state.get('sensitive'));
       }
 
@@ -245,8 +242,7 @@ export default function compose(state = initialState, action) {
     });
   case COMPOSE_SPOILER_TEXT_CHANGE:
     return state.withMutations(map => {
-      if (isSpoilerActive(state) || (enableAlwaysShowSpoiler && action.text.length > 0)) {
-        // Don't automatically turn off image sensitivity if we had a CW in there.
+      if (enableAlwaysShowSpoiler && action.text.length > 0) {
         map.set('sensitive', true);
       }
       map.set('spoiler_text', action.text);
@@ -280,9 +276,8 @@ export default function compose(state = initialState, action) {
       if (action.status.get('spoiler_text').length > 0) {
         map.set('spoiler', true);
         map.set('spoiler_text', action.status.get('spoiler_text'));
-        map.set('sensitive', true);
       } else {
-        map.set('spoiler', enableAlwaysShowSpoiler);
+        map.set('spoiler', !enableAlwaysShowSpoiler);
         map.set('spoiler_text', '');
       }
     });
@@ -338,7 +333,7 @@ export default function compose(state = initialState, action) {
   case COMPOSE_SUGGESTIONS_READY:
     return state.set('suggestions', ImmutableList(action.accounts ? action.accounts.map(item => item.id) : action.emojis)).set('suggestion_token', action.token);
   case COMPOSE_SUGGESTION_SELECT:
-    return insertSuggestion(state, action.position, action.token, action.completion, action.path);
+    return insertSuggestion(state, action.position, action.token, action.completion);
   case COMPOSE_SUGGESTION_TAGS_UPDATE:
     return updateSuggestionTags(state, action.token);
   case COMPOSE_TAG_HISTORY_UPDATE:
@@ -363,7 +358,7 @@ export default function compose(state = initialState, action) {
       }));
   case REDRAFT:
     return state.withMutations(map => {
-      map.set('text', action.raw_text || unescapeHTML(expandMentions(action.status)));
+      map.set('text', unescapeHTML(expandMentions(action.status)));
       map.set('in_reply_to', action.status.get('in_reply_to_id'));
       map.set('privacy', action.status.get('visibility'));
       map.set('federation', !action.status.get('local_only'));
@@ -371,7 +366,6 @@ export default function compose(state = initialState, action) {
       map.set('focusDate', new Date());
       map.set('caretPosition', null);
       map.set('idempotencyKey', uuid());
-      map.set('sensitive', action.status.get('sensitive'));
 
       if (action.status.get('spoiler_text').length > 0) {
         map.set('spoiler', true);

@@ -19,7 +19,10 @@ class FollowingAccountsController < ApplicationController
       format.json do
         raise Mastodon::NotPermittedError if params[:page].present? && @account.user_hides_network?
 
-        expires_in 3.minutes, public: true if params[:page].blank?
+        if params[:page].blank?
+          skip_session!
+          expires_in 3.minutes, public: true
+        end
 
         render json: collection_presenter,
                serializer: ActivityPub::CollectionSerializer,

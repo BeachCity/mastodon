@@ -244,8 +244,6 @@ class MediaGallery extends React.PureComponent {
     intl: PropTypes.object.isRequired,
     defaultWidth: PropTypes.number,
     cacheWidth: PropTypes.func,
-    visible: PropTypes.bool,
-    onToggleVisibility: PropTypes.func,
   };
 
   static defaultProps = {
@@ -253,24 +251,18 @@ class MediaGallery extends React.PureComponent {
   };
 
   state = {
-    visible: this.props.visible !== undefined ? this.props.visible : (displayMedia !== 'hide_all' && !this.props.sensitive || displayMedia === 'show_all'),
+    visible: displayMedia !== 'hide_all' && !this.props.sensitive || displayMedia === 'show_all',
     width: this.props.defaultWidth,
   };
 
   componentWillReceiveProps (nextProps) {
-    if (!is(nextProps.media, this.props.media) && nextProps.visible === undefined) {
-      this.setState({ visible: displayMedia !== 'hide_all' && !nextProps.sensitive || displayMedia === 'show_all' });
-    } else if (!is(nextProps.visible, this.props.visible) && nextProps.visible !== undefined) {
-      this.setState({ visible: nextProps.visible });
+    if (!is(nextProps.media, this.props.media)) {
+      this.setState({ visible: !nextProps.sensitive });
     }
   }
 
   handleOpen = () => {
-    if (this.props.onToggleVisibility) {
-      this.props.onToggleVisibility();
-    } else {
-      this.setState({ visible: !this.state.visible });
-    }
+    this.setState({ visible: !this.state.visible });
   }
 
   handleClick = (index) => {

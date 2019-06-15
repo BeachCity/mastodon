@@ -126,15 +126,15 @@ function main() {
     return false;
   });
 
-  delegate(document, '.status__content__spoiler-link', 'click', function() {
-    const contentEl = this.parentNode.parentNode.querySelector('.e-content');
+  delegate(document, '.status__content__spoiler-link', 'click', ({ target }) => {
+    const contentEl = target.parentNode.parentNode.querySelector('.e-content');
 
     if (contentEl.style.display === 'block') {
       contentEl.style.display = 'none';
-      this.parentNode.style.marginBottom = 0;
+      target.parentNode.style.marginBottom = 0;
     } else {
       contentEl.style.display = 'block';
-      this.parentNode.style.marginBottom = null;
+      target.parentNode.style.marginBottom = null;
     }
 
     return false;

@@ -61,7 +61,7 @@ describe Api::V1::Accounts::CredentialsController do
 
       describe 'with invalid data' do
         before do
-          patch :update, params: { note: 'This is too long. ' * 30 }
+          patch :update, params: { note: 'This is too long. ' * 10 }
         end
 
         it 'returns http unprocessable entity' do

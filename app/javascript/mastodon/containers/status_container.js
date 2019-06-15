@@ -69,18 +69,18 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
   },
 
   onModalReblog (status) {
-    if (status.get('reblogged')) {
-      dispatch(unreblog(status));
-    } else {
-      dispatch(reblog(status));
-    }
+    dispatch(reblog(status));
   },
 
   onReblog (status, e) {
-    if (e.shiftKey || !boostModal) {
-      this.onModalReblog(status);
+    if (status.get('reblogged')) {
+      dispatch(unreblog(status));
     } else {
-      dispatch(openModal('BOOST', { status, onReblog: this.onModalReblog }));
+      if (e.shiftKey || !boostModal) {
+        this.onModalReblog(status);
+      } else {
+        dispatch(openModal('BOOST', { status, onReblog: this.onModalReblog }));
+      }
     }
   },
 
@@ -171,7 +171,7 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
     } else {
       dispatch(hideStatus(status.get('id')));
     }
-  }
+  },
 
 });
 

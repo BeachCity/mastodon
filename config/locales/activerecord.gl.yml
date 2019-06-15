@@ -5,6 +5,8 @@ gl:
       poll:
         expires_at: Caducidade
         options: Opcións
+      status:
+        owned_poll: Sondaxe
     errors:
       models:
         account:
