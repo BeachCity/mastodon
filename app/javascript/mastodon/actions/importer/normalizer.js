@@ -1,7 +1,7 @@
 import escapeTextContentForBrowser from 'escape-html';
 import emojify from '../../features/emoji/emoji';
 import { unescapeHTML } from '../../utils/html';
-import { expandSpoilers } from '../../initial_state';
+import { expandSpoilers, displayMedia } from '../../initial_state';
 
 const domParser = new DOMParser();
 
@@ -54,6 +54,7 @@ export function normalizeStatus(status, normalOldStatus) {
     normalStatus.contentHtml = normalOldStatus.get('contentHtml');
     normalStatus.spoilerHtml = normalOldStatus.get('spoilerHtml');
     normalStatus.hidden = normalOldStatus.get('hidden');
+    normalStatus.media_hidden = normalOldStatus.get('media_hidden');
   } else {
     const spoilerText   = normalStatus.spoiler_text || '';
     const searchContent = [spoilerText, status.content].join('\n\n').replace(/<br\s*\/?>/g, '\n').replace(/<\/p><p>/g, '\n\n');
@@ -63,6 +64,7 @@ export function normalizeStatus(status, normalOldStatus) {
     normalStatus.contentHtml  = emojify(normalStatus.content, emojiMap);
     normalStatus.spoilerHtml  = emojify(escapeTextContentForBrowser(spoilerText), emojiMap);
     normalStatus.hidden       = expandSpoilers ? false : spoilerText.length > 0 || normalStatus.sensitive;
+    normalStatus.media_hidden = (displayMedia === 'hide_all' || normalStatus.sensitive) && displayMedia !== 'show_all';
   }
 
   return normalStatus;

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
+import Icon from 'mastodon/components/icon';
 import { autoPlayGif, displayMedia } from 'mastodon/initial_state';
 import classNames from 'classnames';
 import { decode } from 'blurhash';
@@ -130,6 +131,14 @@ export default class MediaItem extends ImmutablePureComponent {
 
           <span className='media-gallery__gifv__label'>GIF</span>
         </div>
+      );
+    }
+
+    if (!visible) {
+      icon = (
+        <span className='account-gallery__item__icons'>
+          <Icon id='eye-slash' />
+        </span>
       );
     }
 

@@ -2,7 +2,27 @@ Changelog
 =========
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
+## [1.8.0] - 2019-06-??
+
+### Added
+- You can now mark yourself as a bot without being treated as a source of potentially automated and unmonitored content
+
+### Changed
+- Opening sensitive image will open CWs
+- Updated to Mastodon Vanilla 2.9.0rc2
+- Given official single column support, our hacked version was removed
+
+### Fixed
+- CW field no longer vanishes in certain conditions when always CW option is on
+- Image sensitivity can be changed when always CW option is on and text is deleted
+
 =======
+## [1.7.1] - 2019-06-05
+
+### Fixed
+- Fixed reply behavior for CWs
+
+===================================================================================
 ## [1.7.0] - 2019-06-03
 
 ### Added
