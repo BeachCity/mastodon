@@ -478,9 +478,12 @@ class UI extends React.PureComponent {
       goToRequests: this.handleHotkeyGoToRequests,
     };
 
+    // FIXME: Beach City Temporary hack. We need to fix this for realsies.
+    const uiClasses = forceSingleColumn ? 'ui' : 'ui ui-background';
+
     return (
       <HotKeys keyMap={keyMap} handlers={handlers} ref={this.setHotkeysRef} attach={window} focused>
-        <div className={classNames('ui', { 'is-composing': isComposing })} ref={this.setRef} style={{ pointerEvents: dropdownMenuIsOpen ? 'none' : null }}>
+        <div className={classNames(uiClasses, { 'is-composing': isComposing })} ref={this.setRef} style={{ pointerEvents: dropdownMenuIsOpen ? 'none' : null }}>
           <SwitchingColumnsArea location={location} onLayoutChange={this.handleLayoutChange}>
             {children}
           </SwitchingColumnsArea>

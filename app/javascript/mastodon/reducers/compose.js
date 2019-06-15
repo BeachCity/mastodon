@@ -148,7 +148,7 @@ function removeMedia(state, mediaId) {
 };
 
 function isSpoilerActive(state) {
-  return enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler')
+  return enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler');
 };
 
 const insertSuggestion = (state, position, token, completion, path) => {
