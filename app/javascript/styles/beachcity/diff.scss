@@ -16,6 +16,18 @@
   background: none !important;
 }
 
+/* Temporary changes for fixing single column mode - ag */
+.navigation-panel, .compose-panel {
+  background:rgba(70, 0, 50, 0.9);
+  height: auto
+}
+
+.navigation-bar, .navigation-panel a:nth-child(1) {
+  background: #771c54
+}
+
+/* end temp changes */
+
 .compose-form textarea, .compose-form__modifiers, .compose-form .spoiler-input__input {
   background-color: #FFFFD9 !important;
 }
