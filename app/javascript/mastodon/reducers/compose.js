@@ -148,7 +148,7 @@ function removeMedia(state, mediaId) {
 };
 
 function isSpoilerActive(state) {
-  return enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler')
+  return enableAlwaysShowSpoiler ? state.get('spoiler_text').length > 0 : state.get('spoiler');
 };
 
 const insertSuggestion = (state, position, token, completion, path) => {
@@ -377,7 +377,7 @@ export default function compose(state = initialState, action) {
         map.set('spoiler', true);
         map.set('spoiler_text', action.status.get('spoiler_text'));
       } else {
-        map.set('spoiler', !enableAlwaysShowSpoiler);
+        map.set('spoiler', enableAlwaysShowSpoiler);
         map.set('spoiler_text', '');
       }
 
