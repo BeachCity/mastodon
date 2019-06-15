@@ -17,6 +17,7 @@ All changes to Beach City beyond the vanilla Mastodon code will be documented he
 - Local only toots do not appear in the federated timeline
 - CW field no longer vanishes in certain conditions when always CW option is on
 - Image sensitivity can be changed when always CW option is on and text is deleted
+- Fixed redraft behaior for CWs
 
 ===================================================================================
 ## [1.7.0] - 2019-06-03
