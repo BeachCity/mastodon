@@ -2,14 +2,14 @@ Changelog
 =========
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
-## [1.8.0] - 2019-06-??
+## [1.8.0] - 2019-06-17
 
 ### Added
 - You can now mark yourself as a bot without being treated as a source of potentially automated and unmonitored content
 
 ### Changed
 - Opening sensitive image will open CWs
-- Updated to Mastodon Vanilla 2.9.0rc2
+- Updated to Mastodon Vanilla 2.9.0
 - Given official single column support, our hacked version was removed
 
 ### Fixed
