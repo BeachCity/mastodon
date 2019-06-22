@@ -2,6 +2,13 @@ Changelog
 =========
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
+
+## [1.8.1] - 2019-06-22
+
+## Changed
+- Updated to Mastodon Vanilla 2.9.1
+
+=======
 ## [1.8.0] - 2019-06-17
 
 ### Added
