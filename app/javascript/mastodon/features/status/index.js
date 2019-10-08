@@ -82,16 +82,6 @@ const makeMapStateToProps = () => {
   const getDescendantsIds = createSelector([
     (_, { id }) => id,
     state => state.getIn(['contexts', 'replies']),
-  ], (statusId, contextReplies) => {
-    descendantsIds = descendantsIds.withMutations(mutable => {
-      const ids = [statusId];
-
-    return ancestorsIds;
-  });
-
-  const getDescendantsIds = createSelector([
-    (_, { id }) => id,
-    state => state.getIn(['contexts', 'replies']),
     state => state.get('statuses'),
   ], (statusId, contextReplies, statuses) => {
     let descendantsIds = [];
