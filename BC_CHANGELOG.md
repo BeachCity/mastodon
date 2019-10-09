@@ -3,6 +3,19 @@ Changelog
 
 All changes to Beach City beyond the vanilla Mastodon code will be documented here.
 
+=======
+## [1.9.1] - 2019-10-08
+
+## Fixed
+- Boosting posts causes 500 error
+  
+=======
+## [1.9.0] - 2019-10-07
+
+## Changed
+- Updated to Mastodon Vanilla 3.0.0
+
+=======
 ## [1.8.1] - 2019-06-22
 
 ## Changed
