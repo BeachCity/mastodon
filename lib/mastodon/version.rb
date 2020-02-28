@@ -9,11 +9,11 @@ module Mastodon
     end
 
     def minor
-      0
+      1
     end
 
     def patch
-      1
+      2
     end
 
     def flags
@@ -29,7 +29,7 @@ module Mastodon
     end
 
     def suffix
-      '+beachcity1.9.1'
+      '+beachcity1.10.0'
     end
 
     def to_s
