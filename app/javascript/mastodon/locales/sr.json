@@ -165,22 +165,15 @@
   "empty_column.mutes": "Још увек немате ућутканих корисника.",
   "empty_column.notifications": "Тренутно немате обавештења. Дружите се мало да започнете разговор.",
   "empty_column.public": "Овде нема ничега! Напишите нешто јавно, или нађите кориснике са других инстанци које ћете запратити да попуните ову празнину",
-<<<<<<< HEAD
   "federation.change": "Adjust status federation",
   "federation.federated.long": "Allow toot to reach other instances",
   "federation.federated.short": "Federated",
   "federation.local_only.long": "Restrict this toot only to my instance",
   "federation.local_only.short": "Local-only",
-  "error.unexpected_crash.explanation": "Due to a bug in our code or a browser compatibility issue, this page could not be displayed correctly.",
-  "error.unexpected_crash.next_steps": "Try refreshing the page. If that does not help, you may still be able to use Mastodon through a different browser or native app.",
-  "errors.unexpected_crash.copy_stacktrace": "Copy stacktrace to clipboard",
-  "errors.unexpected_crash.report_issue": "Report issue",
-=======
   "error.unexpected_crash.explanation": "Због грешке у нашем коду или проблема са компатибилношћу прегледача, ова страница се није могла правилно приказати.",
   "error.unexpected_crash.next_steps": "Покушајте да освежите страницу. Ако то не помогне, можда ћете и даље моћи да користите Мастодон путем другог прегледача или матичне апликације.",
   "errors.unexpected_crash.copy_stacktrace": "Копирај \"stacktrace\" у клипборд",
   "errors.unexpected_crash.report_issue": "Пријави проблем",
->>>>>>> upstream32
   "follow_request.authorize": "Одобри",
   "follow_request.reject": "Одбиј",
   "follow_requests.unlocked_explanation": "Even though your account is not locked, the {domain} staff thought you might want to review follow requests from these accounts manually.",

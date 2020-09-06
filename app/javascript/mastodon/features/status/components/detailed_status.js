@@ -6,8 +6,6 @@ import DisplayName from '../../../components/display_name';
 import StatusContent from '../../../components/status_content';
 import MediaGallery from '../../../components/media_gallery';
 import { Link } from 'react-router-dom';
-import { FormattedDate } from 'react-intl';
-import { defineMessages, injectIntl, FormattedDate } from 'react-intl';
 import { injectIntl, defineMessages, FormattedDate } from 'react-intl';
 import Card from './card';
 import ImmutablePureComponent from 'react-immutable-pure-component';
@@ -102,7 +100,6 @@ class DetailedStatus extends ImmutablePureComponent {
 
   render () {
     const status = (this.props.status && this.props.status.get('reblog')) ? this.props.status.get('reblog') : this.props.status;
-    const intl = this.props.intl;
     const outerStyle = { boxSizing: 'border-box' };
     const { intl, compact } = this.props;
 

@@ -42,7 +42,7 @@ class AccountsController < ApplicationController
         expires_in 1.minute, public: true
 
         limit     = params[:limit].present? ? [params[:limit].to_i, PAGE_SIZE_MAX].min : PAGE_SIZE
-        @statuses = filtered_statuses.without_reblogs.limit(limit)).without_local_only
+        @statuses = filtered_statuses.without_reblogs.without_local_only.limit(limit)
         @statuses = cache_collection(@statuses, Status)
         render xml: RSS::AccountSerializer.render(@account, @statuses, params[:tag])
       end
@@ -76,7 +76,7 @@ class AccountsController < ApplicationController
     if current_user.nil?
       @account.statuses.without_local_only.where(visibility: [:public, :unlisted])
     else
-      @account.statuses.where(visibility: [:public, :unlisted])
+          @account.statuses.where(visibility: [:public, :unlisted])
     end
   end
 
