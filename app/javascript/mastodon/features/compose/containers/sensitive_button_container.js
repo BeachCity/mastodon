@@ -7,13 +7,20 @@ import { injectIntl, defineMessages, FormattedMessage } from 'react-intl';
 import { enableAlwaysShowSpoiler } from '../../../initial_state';
 
 const messages = defineMessages({
-  marked: { id: 'compose_form.sensitive.marked', defaultMessage: 'Media is marked as sensitive' },
-  unmarked: { id: 'compose_form.sensitive.unmarked', defaultMessage: 'Media is not marked as sensitive' },
+  marked: {
+    id: 'compose_form.sensitive.marked',
+    defaultMessage: '{count, plural, one {Media is marked as sensitive} other {Media is marked as sensitive}}',
+  },
+  unmarked: {
+    id: 'compose_form.sensitive.unmarked',
+    defaultMessage: '{count, plural, one {Media is not marked as sensitive} other {Media is not marked as sensitive}}',
+  },
 });
 
 const mapStateToProps = state => ({
   active: state.getIn(['compose', 'sensitive']),
   disabled: enableAlwaysShowSpoiler ? state.getIn(['compose', 'spoiler_text']).length > 0 : state.getIn(['compose', 'spoiler']),
+  mediaCount: state.getIn(['compose', 'media_attachments']).size,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -29,16 +36,17 @@ class SensitiveButton extends React.PureComponent {
   static propTypes = {
     active: PropTypes.bool,
     disabled: PropTypes.bool,
+    mediaCount: PropTypes.number,
     onClick: PropTypes.func.isRequired,
     intl: PropTypes.object.isRequired,
   };
 
   render () {
-    const { active, disabled, onClick, intl } = this.props;
+    const { active, disabled, mediaCount, onClick, intl } = this.props;
 
     return (
       <div className='compose-form__sensitive-button'>
-        <label className={classNames('icon-button', { active })} title={intl.formatMessage(active ? messages.marked : messages.unmarked)}>
+        <label className={classNames('icon-button', { active })} title={intl.formatMessage(active ? messages.marked : messages.unmarked, { count: mediaCount })}>
           <input
             name='mark-sensitive'
             type='checkbox'
@@ -49,7 +57,11 @@ class SensitiveButton extends React.PureComponent {
 
           <span className={classNames('checkbox', { active })} />
 
-          <FormattedMessage id='compose_form.sensitive.hide' defaultMessage='Mark media as sensitive' />
+          <FormattedMessage
+            id='compose_form.sensitive.hide'
+            defaultMessage='{count, plural, one {Mark media as sensitive} other {Mark media as sensitive}}'
+            values={{ count: mediaCount }}
+          />
         </label>
       </div>
     );

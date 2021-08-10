@@ -36,6 +36,7 @@ class InitialStateSerializer < ActiveModel::Serializer
       store[:enable_doodle]   = object.current_account.user.setting_enable_doodle
       store[:enable_federation_dropdown] = object.current_account.user.setting_enable_federation_dropdown
       store[:enable_always_show_spoiler] = object.current_account.user.setting_enable_always_show_spoiler
+      store[:disable_swiping]   = object.current_account.user.setting_disable_swiping
       store[:advanced_layout]   = object.current_account.user.setting_advanced_layout
       store[:use_blurhash]      = object.current_account.user.setting_use_blurhash
       store[:use_pending_items] = object.current_account.user.setting_use_pending_items
