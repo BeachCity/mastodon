@@ -90,7 +90,7 @@ gem 'sidekiq-bulk', '~>0.2.0'
 gem 'simple-navigation', '~> 4.1'
 gem 'simple_form', '~> 5.0'
 gem 'sprockets-rails', '~> 3.2', require: 'sprockets/railtie'
-gem 'stoplight', '~> 2.2.1'
+gem 'stoplight', '~> 3.0.0'
 gem 'strong_migrations', '~> 0.7'
 gem 'tty-prompt', '~> 0.22', require: false
 gem 'twitter-text', '~> 1.14'
