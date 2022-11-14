@@ -12,7 +12,7 @@ gem 'thor', '~> 1.0'
 gem 'rack', '~> 2.2.3'
 
 gem 'hamlit-rails', '~> 0.2'
-gem 'pg', '~> 1.2'
+gem 'pg', '~> 1.4'
 gem 'makara', '~> 0.4'
 gem 'pghero', '~> 2.7'
 gem 'dotenv-rails', '~> 2.7'
