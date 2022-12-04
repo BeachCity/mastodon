@@ -6,9 +6,9 @@ ruby '>= 2.5.0', '< 3.0.0'
 gem 'pkg-config', '~> 1.4'
 
 gem 'puma', '~> 4.3'
-gem 'rails', '~> 5.2.4.3'
+gem 'rails', '~> 5.2.8.1'
 gem 'sprockets', '~> 3.7.2'
-gem 'thor', '~> 0.20'
+gem 'thor', '~> 1.2'
 gem 'rack', '~> 2.2.3'
 
 gem 'thwait', '~> 0.1.0'
@@ -86,7 +86,7 @@ gem 'ruby-progressbar', '~> 1.10'
 gem 'sanitize', '~> 5.2'
 gem 'sidekiq', '~> 6.0'
 gem 'sidekiq-scheduler', '~> 3.0'
-gem 'sidekiq-unique-jobs', '~> 6.0'
+gem 'sidekiq-unique-jobs', '~> 7.1'
 gem 'sidekiq-bulk', '~>0.2.0'
 gem 'simple-navigation', '~> 4.1'
 gem 'simple_form', '~> 5.0'
@@ -141,7 +141,7 @@ group :development do
   gem 'rubocop', '~> 0.86', require: false
   gem 'rubocop-rails', '~> 2.6', require: false
   gem 'brakeman', '~> 4.8', require: false
-  gem 'bundler-audit', '~> 0.7', require: false
+  gem 'bundler-audit', '~> 0.9', require: false
 
   gem 'capistrano', '~> 3.14'
   gem 'capistrano-rails', '~> 1.5'
