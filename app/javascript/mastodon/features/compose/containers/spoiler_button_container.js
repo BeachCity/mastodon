@@ -14,7 +14,7 @@ const mapStateToProps = (state, { intl }) => ({
   label: 'CW',
   title: intl.formatMessage(state.getIn(['compose', 'spoiler']) ? messages.marked : messages.unmarked),
   active: state.getIn(['compose', 'spoiler']),
-  ariaControls: 'cw-spoiler-input'
+  ariaControls: 'cw-spoiler-input',
 });
 
 const mapDispatchToProps = dispatch => ({
