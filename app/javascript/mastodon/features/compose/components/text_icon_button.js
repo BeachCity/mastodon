@@ -24,11 +24,7 @@ export default class TextIconButton extends React.PureComponent {
   }
 
   render () {
-    const { label, title, active, ariaControls, unavailable } = this.props;
-
-    if (unavailable) {
-      return null;
-    }
+    const { label, title, active, ariaControls } = this.props;
 
     return (
       <button
