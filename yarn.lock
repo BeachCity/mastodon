@@ -11344,10 +11344,10 @@ which@^2.0.1, which@^2.0.2:
   dependencies:
     isexe "^2.0.0"
 
-wicg-inert@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/wicg-inert/-/wicg-inert-3.0.3.tgz#7d05eaed64176887ee4c66fc0c4d6fe4b38ccce5"
-  integrity sha512-XwXf8K0NN4cpagjBlZ2/j/5Sjf6dW3HNbfywEy1y6Z8PJKvSHVGiuc5Id/9RZ6EmGq+GQCGTo7B2SK0Misbr6g==
+wicg-inert@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/wicg-inert/-/wicg-inert-3.1.2.tgz#df10cf756b773a96fce107c3ddcd43be5d1e3944"
+  integrity sha512-Ba9tGNYxXwaqKEi9sJJvPMKuo063umUPsHN0JJsjrs2j8KDSzkWLMZGZ+MH1Jf1Fq4OWZ5HsESJID6nRza2ang==
 
 wide-align@^1.1.0:
   version "1.1.3"
