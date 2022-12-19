@@ -1735,8 +1735,6 @@ en:
     contrast: Mastodon (High contrast)
     default: Mastodon (Dark)
     mastodon-light: Mastodon (Light)
-    mastodon-dark: Mastodon (Dark)
-    beach-city: Beach City
   time:
     formats:
       default: "%b %d, %Y, %H:%M"
