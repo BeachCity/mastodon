@@ -1208,6 +1208,9 @@ en:
     none: None
     order_by: Order by
     save_changes: Save all changes
+    select_all_matching_items:
+      one: Select %{count} item matching your search.
+      other: Select all %{count} items matching your search.
     today: today
     save: Save
     validation_errors:
@@ -1594,9 +1597,10 @@ en:
     does_not_match_previous_name: does not match the previous name
   themes:
     contrast: Mastodon (High contrast)
-    default: Beach City
+    default: Mastodon (Dark)
     mastodon-light: Mastodon (Light)
     mastodon-dark: Mastodon (Dark)
+    beach-city: Beach City
   time:
     formats:
       default: "%b %d, %Y, %H:%M"
