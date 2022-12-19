@@ -15,7 +15,6 @@ export default class TextIconButton extends PureComponent {
     active: PropTypes.bool,
     onClick: PropTypes.func.isRequired,
     ariaControls: PropTypes.string,
-    unavailable: PropTypes.bool
   };
 
   render () {
