@@ -11,7 +11,6 @@ import {
   uploadCompose,
 } from '../../../actions/compose';
 import ComposeForm from '../components/compose_form';
-import { enableAlwaysShowSpoiler } from '../../../initial_state';
 
 const mapStateToProps = state => ({
   text: state.getIn(['compose', 'text']),
